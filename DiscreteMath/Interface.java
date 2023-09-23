@@ -16,6 +16,7 @@ public class Interface extends JFrame implements ActionListener {
     JButton conjuncaoButton = new JButton("∧");
     JButton disjuncaoButton = new JButton("∨");
     ArrayList<String>caracters = new ArrayList<String>();
+    Operations operations = new Operations();
 
 
     public static void main(String[] args)
@@ -106,24 +107,19 @@ public class Interface extends JFrame implements ActionListener {
         disjuncaoButton.addActionListener(this);
     }
 
-    void ConjuncaoInterface(){
-        if (caracters.size() > 0 && caracters.get(caracters.size() - 1).equals("p")) {
-            System.out.print("Nao adicionamos nada");
+
+    private void ConjuncaoInterface(){
+        if (!(caracters.size() > 0 && caracters.get(caracters.size() - 1).equals("^"))) {
+            caracters.add("^");
+            operations.getElements(caracters);
         }
-        else{
-            caracters.add("p");
-        }
-        System.out.print(caracters);
     }
 
-    void DisjuncaoInclusivaInterface(){
-        if (caracters.size() > 0 && caracters.get(caracters.size() - 1).equals("q")) {
-            System.out.print("Nao adicionamos nada");
+    public void DisjuncaoInclusivaInterface(){
+        if (!(caracters.size() > 0 && caracters.get(caracters.size() - 1).equals("v"))) {
+            caracters.add("v");
+            operations.getElements(caracters);
         }
-        else{
-            caracters.add("q");
-        }
-        System.out.print(caracters);
     }
 
     @Override

@@ -1,19 +1,13 @@
 package DiscreteMath;
-import java.util.Scanner;
+
+import java.util.ArrayList;
 
 public class Operations {
-    static Scanner leitor = new Scanner(System.in);
-    String conjuncao = "e", disjuncaoInclusiva = "ou", negacao = "não", disjuncaoExclusiva = "ou {} ou {}", condicional = "se {} então {}", bicondicional = "se, e somente se";
-    boolean[] valores = {true, false}, tautologia = {true, true}, contradiacao = {false, false}, contingencia = {true, false};
-    static int p = 0, q = 0, r = 0, s = 0;
-    public static void main(String[] args) {
-        System.out.print("chamou aq");
+
+    public ArrayList<String> getElements(ArrayList<String> caracters){
+        System.out.print(caracters);
+        return null;
     }
-
-    public void Ops(){
-
-    }
-
     public void Conjuncao(){
         System.out.print("chamou aq");
     }
@@ -26,8 +20,9 @@ public class Operations {
         System.out.print("chamou aq");
     }
 
-    public void DisjuncaoExclusiva(){
+    public Object DisjuncaoExclusiva(){
         System.out.print("chamou aq");
+        return null;
     }
 
     public void Condicional(){
