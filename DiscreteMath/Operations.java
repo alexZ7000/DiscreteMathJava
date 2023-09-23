@@ -7,32 +7,62 @@ public class Operations {
     boolean[] valores = {true, false}, tautologia = {true, true}, contradiacao = {false, false}, contingencia = {true, false};
     static int p = 0, q = 0, r = 0, s = 0;
     public static void main(String[] args) {
-        p = 1;
-        q = 1;
-        if (p ==1 && q==0 && r==0 && s ==0)
-            System.out.print("V\nF");
-        else if (p ==0 && q==1 && r==0 && s ==0)
-            System.out.print("V\nF");
-        else if (p ==0 && q==0 && r==1 && s ==0)
-            System.out.print("V\nF");
-        else if (p ==0 && q==0 && r==0 && s ==1)
-            System.out.print("V\nF");
-        else if (p ==1 && q==1 && r==0 && s ==0) {
-            System.out.println("\nV".repeat(2) + "\nF".repeat(2));
-            System.out.print("  *******************  ");
-            System.out.println("\nV\nF".repeat(2));
-        }
-        else if (p ==1 && q==0 && r==1 && s ==0) {
-            System.out.println("\nV".repeat(2) + "\nF".repeat(2));
-            System.out.print("  *******************  ");
-            System.out.print("\nV\nF".repeat(2));
-        }
-        else if (p ==1 && q==0 && r==0 && s ==1) {
-            System.out.println("\nV".repeat(2) + "\nF".repeat(2));
-            System.out.print("  *******************  ");
-            System.out.print("\nV\nF".repeat(2));
-        }
+        System.out.print("chamou aq");
     }
 
+    public void Ops(){
 
+    }
+
+    public void Conjuncao(){
+        System.out.print("chamou aq");
+    }
+
+    public void DisjuncaoInclusiva(){
+        System.out.print("chamou aq");
+    }
+
+    public void Negacao(){
+        System.out.print("chamou aq");
+    }
+
+    public void DisjuncaoExclusiva(){
+        System.out.print("chamou aq");
+    }
+
+    public void Condicional(){
+        System.out.print("chamou aq");
+    }
+
+    public void Bicondicional(){
+        System.out.print("chamou aq");
+    }
+
+    public void Tautologia(){
+        System.out.print("chamou aq");
+    }
+
+    public void Contradiacao(){
+        System.out.print("chamou aq");
+    }
+
+    public void Contingencia(){
+        System.out.print("chamou aq");
+    }
+
+    public void Equivalencia(){
+        System.out.print("chamou aq");
+    }
+
+    public void Validade(){
+        System.out.print("chamou aq");
+    }
+
+    public void Satisfativel(){
+        System.out.print("chamou aq");
+    }
+
+    public void Insatisfativel(){
+        System.out.print("chamou aq");
+    }
 }
