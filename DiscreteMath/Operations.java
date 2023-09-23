@@ -4,12 +4,20 @@ import java.util.ArrayList;
 
 public class Operations {
 
-    public ArrayList<String> getElements(ArrayList<String> caracters){
-        System.out.print(caracters);
-        return null;
+    public void getElements(ArrayList<String> caracters) {
+        for (String caracter : caracters) {
+            if (caracter.contains("v")) {
+                System.out.println(caracter);
+            }
+        }
     }
     public void Conjuncao(){
         System.out.print("chamou aq");
+    }
+
+    public static String resultOperation(ArrayList<String> caracters){
+        System.out.print("chamou aq");
+        return null;
     }
 
     public void DisjuncaoInclusiva(){
