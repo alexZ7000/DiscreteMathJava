@@ -3,27 +3,75 @@ package DiscreteMath;
 import java.util.ArrayList;
 
 public class Operations {
-
-    public void getElements(ArrayList<String> caracters) {
-        for (String caracter : caracters) {
-            if (caracter.contains("v")) {
-                System.out.println(caracter);
+    public int numberOfLines(String characters) {
+        int lines = 0;
+        if (characters.contains("P")) {
+            lines = 2;
+            if (characters.contains("Q")) {
+                lines = 4;
+                if (characters.contains("R")) {
+                    lines = 8;
+                    if (characters.contains("S")) {
+                        lines = 16;
+                    }
+                }
             }
         }
+        System.out.println(lines);
+        return lines;
     }
+
+    public String TitleConstructor(int lines, String separator, String characters) {
+        String title = "<h1>" + characters + "</h1>";
+        StringBuilder subtitle = new StringBuilder();
+
+        return title;
+    }
+
+    public String TableConstructor(int lines, String title){
+        StringBuilder htmlText = new StringBuilder("""
+                   <html>
+                     <head>
+                         <style>
+                             table {
+                                 border-collapse: collapse;
+                             }
+                             table, th, td {
+                                 border: 1px solid black;
+                                 text-align: center;
+                             }
+                             th, td {
+                                 padding: 10px;
+                             }
+                         </style>
+                     </head>
+                     <body>
+                         <table>
+                            
+                            
+                            
+                         
+                    """);
+        htmlText.append(title).append("            <tr>V</tr>\n".repeat(Math.max(0, lines)));
+        htmlText.append("</table></body></html> ");
+        return htmlText.toString();
+    }
+
+    public String SeparateOperation(String characters){
+        return null;
+    }
+
     public void Conjuncao(){
         System.out.print("chamou aq");
     }
 
-    public static String resultOperation(ArrayList<String> caracters){
-        System.out.print("chamou aq");
-        return """
-                V       V
-                V       F
-                F       V
-                F       F
-                """;
+    public String resultOperation(String characters){
+        int lines = numberOfLines(characters);
+        String separator = SeparateOperation(characters);
+        String title = TitleConstructor(lines,separator, characters);
+        return TableConstructor(lines, title);
     }
+
 
     public void DisjuncaoInclusiva(){
         System.out.print("chamou aq");

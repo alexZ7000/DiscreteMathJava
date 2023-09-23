@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Interface extends JFrame implements ActionListener {
@@ -26,8 +27,10 @@ public class Interface extends JFrame implements ActionListener {
     JButton leftParenthesisButton = new JButton("(");
     JButton rightParenthesisButton = new JButton(")");
     JButton deleteButton = new JButton("Apagar");
+    JLabel label = new JLabel();
 
-    ArrayList<String>caracters = new ArrayList<>();
+    ArrayList<String> characters = new ArrayList<>();
+    Operations operations = new Operations();
 
 
     public static void main(String[] args)
@@ -293,7 +296,9 @@ public class Interface extends JFrame implements ActionListener {
     }
 
     private void CalcularInterface(){
-        String result = Operations.resultOperation(caracters);
+        String strCaracters = characters.toString().substring(1, characters.toString().length() - 1);
+        strCaracters = strCaracters.replaceAll(",", "");
+        String result = operations.resultOperation(String.valueOf(characters));
         JOptionPane.showMessageDialog(
                 frame,
                 result,
@@ -303,20 +308,31 @@ public class Interface extends JFrame implements ActionListener {
         JLabel label = new JLabel();
         label.setFont(new Font("serif", Font.PLAIN, 20));
         label.setBounds(
-                1900/2-200, 180, 800,
+                1900/2+300, 450, 1200,
+                550
+        );
+        frame.add(label);
+        label.setText(result);
+    }
+
+    private void UpdateUI(boolean isDelete){
+        label.setFont(new Font("serif", Font.PLAIN, 40));
+        label.setBounds(
+                1900/2-200, 290, 800,
                 100
         );
         frame.add(label);
-        label.setText("<html>V       V<br>V       F<br>F       V<br>F       F</html> ");
+        String strCaracters = characters.toString().substring(1, characters.toString().length() - 1);
+        strCaracters = strCaracters.replaceAll(",", "");
+        label.setText(strCaracters);
+        if (isDelete){
+            frame.add(label);
+        }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        ArrayList<String> prop = new ArrayList<>();
-        prop.add("P");
-        prop.add("Q");
-        prop.add("R");
-        prop.add("S");
+        ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
+        ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
         if (e.getSource() == exitButton) {
             if (JOptionPane.showConfirmDialog(
                     frame,
@@ -326,96 +342,120 @@ public class Interface extends JFrame implements ActionListener {
                 System.exit(0);
         }
         else if (e.getSource() == conjuncaoButton){
-            if (caracters.size() == 1 || prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("∧");
-                System.out.println(caracters);
+            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("∧");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == disjuncaoButton){
-            if (caracters.size() == 1 || prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("∨");
-                System.out.println(caracters);
+            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("∨");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == calcButton){
-            CalcularInterface();
+            if (characters.size() > 0 && !lgc.contains(characters.get(characters.size() - 1)))
+                CalcularInterface();
+            else{
+                JOptionPane.showMessageDialog(
+                        frame,
+                        "Insira uma expressão VÁLIDA para calcular",
+                        "DiscreteMath",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
         }
         else if (e.getSource() == negacaoButton){
-            caracters.add("¬");
-            System.out.println(caracters);
+            characters.add("¬");
+            UpdateUI(false);
+            System.out.println(characters);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
 
-            if (caracters.size() == 1 || prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("⊕");
-                System.out.println(caracters);
+            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("⊕");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == condicionalButton){
-            if (caracters.size() == 1 || prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("→");
-                System.out.println(caracters);
+            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("→");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == bicondicionalButton){
-            if (caracters.size() == 1 || prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("↔");
-                System.out.println(caracters);
+            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("↔");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == implicacaoButton){
-            if (!caracters.contains("⇒") && !caracters.contains("⇔")) {
-                caracters.add("⇒");
-                System.out.println(caracters);
+            if (!characters.contains("⇒") && !characters.contains("⇔")) {
+                characters.add("⇒");
+                UpdateUI(false);
+                System.out.println(characters);
             }
 
         }
         else if (e.getSource() == equivalenciaButton){
-            if (!caracters.contains("⇔") && !caracters.contains("⇔")) {
-                caracters.add("⇔");
-                System.out.println(caracters);
+            if (!characters.contains("⇔") && !characters.contains("⇔")) {
+                characters.add("⇔");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoPButton){
-            if (caracters.size() == 0 || !prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("P");
-                System.out.println(caracters);
+            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("P");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoQButton){
-            if (caracters.size() == 0 || !prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("Q");
-                System.out.println(caracters);
+            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("Q");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoRButton){
-            if (caracters.size() == 0 || !prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("R");
-                System.out.println(caracters);
+            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("R");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoSButton){
-            if (caracters.size() == 0 || !prop.contains(caracters.get(caracters.size() - 1))) {
-                caracters.add("S");
-                System.out.println(caracters);
+            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+                characters.add("S");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == leftParenthesisButton){
-            if (caracters.size() > 0) {
-                caracters.add("(");
-                System.out.println(caracters);
+            if (characters.size() > 0) {
+                characters.add("(");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == rightParenthesisButton) {
-            if (caracters.contains("(")) {
-                caracters.add(")");
-                System.out.println(caracters);
+            if (characters.contains("(")) {
+                characters.add(")");
+                UpdateUI(false);
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == deleteButton){
-            if (caracters.size() > 0) {
-                caracters.remove(caracters.size() - 1);
-                System.out.println(caracters);
+            if (characters.size() > 0) {
+                characters.remove(characters.size() - 1);
+                UpdateUI(true);
+                System.out.println(characters);
             }
         }
     }
