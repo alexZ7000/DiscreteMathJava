@@ -170,82 +170,84 @@ public class Interface extends JFrame implements ActionListener {
 
 
         exitButton.setBounds(
-                x/2-100, 800, 220,
+                x/2-100, 700, 220,
                 50
         );
+
+
 
         conjuncaoButton.setBounds(
-                x/2-600, 300, 100,
-                50
-        );
-
-        disjuncaoButton.setBounds(
-                x/2-500, 300, 100,
-                50
-        );
-
-        negacaoButton.setBounds(
-                x/2-400, 300, 100,
-                50
-        );
-
-        disjuncaoExclusivaButton.setBounds(
-                x/2-300, 300, 100,
-                50
-        );
-
-        condicionalButton.setBounds(
-                x/2-200, 300, 100,
-                50
-        );
-
-        bicondicionalButton.setBounds(
-                x/2-100, 300, 100,
-                50
-        );
-
-        implicacaoButton.setBounds(
-                x/2, 300, 100,
-                50
-        );
-
-        equivalenciaButton.setBounds(
-                x/2+100, 300, 100,
-                50
-        );
-
-        proposicaoPButton.setBounds(
-                x/2-600, 400, 100,
-                50
-        );
-
-        proposicaoQButton.setBounds(
-                x/2-500, 400, 100,
-                50
-        );
-
-        proposicaoRButton.setBounds(
                 x/2-400, 400, 100,
                 50
         );
 
-        proposicaoSButton.setBounds(
+        disjuncaoButton.setBounds(
                 x/2-300, 400, 100,
                 50
         );
 
-        leftParenthesisButton.setBounds(
+        negacaoButton.setBounds(
                 x/2-200, 400, 100,
                 50
         );
 
-        rightParenthesisButton.setBounds(
+        disjuncaoExclusivaButton.setBounds(
                 x/2-100, 400, 100,
                 50
         );
 
-        deleteButton.setBounds(
+        condicionalButton.setBounds(
                 x/2, 400, 100,
+                50
+        );
+
+        bicondicionalButton.setBounds(
+                x/2+100, 400, 100,
+                50
+        );
+
+        implicacaoButton.setBounds(
+                x/2+200, 400, 100,
+                50
+        );
+
+        deleteButton.setBounds(
+                x/2+300, 400, 100,
+                50
+        );
+
+        proposicaoPButton.setBounds(
+                x/2-400, 450, 100,
+                50
+        );
+
+        proposicaoQButton.setBounds(
+                x/2-300, 450, 100,
+                50
+        );
+
+        proposicaoRButton.setBounds(
+                x/2-200, 450, 100,
+                50
+        );
+
+        proposicaoSButton.setBounds(
+                x/2-100, 450, 100,
+                50
+        );
+
+        leftParenthesisButton.setBounds(
+                x/2, 450, 100,
+                50
+        );
+
+        rightParenthesisButton.setBounds(
+                x/2+100, 450, 100,
+                50
+        );
+
+        equivalenciaButton.setBounds(
+                x/2+200, 450, 100,
                 50
         );
 
@@ -292,7 +294,20 @@ public class Interface extends JFrame implements ActionListener {
 
     private void CalcularInterface(){
         String result = Operations.resultOperation(caracters);
-        System.out.println(result);
+        JOptionPane.showMessageDialog(
+                frame,
+                result,
+                "DiscreteMath",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        JLabel label = new JLabel();
+        label.setFont(new Font("serif", Font.PLAIN, 20));
+        label.setBounds(
+                1900/2-200, 180, 800,
+                100
+        );
+        frame.add(label);
+        label.setText("<html>V       V<br>V       F<br>F       V<br>F       F</html> ");
     }
 
     @Override

@@ -17,7 +17,12 @@ public class Operations {
 
     public static String resultOperation(ArrayList<String> caracters){
         System.out.print("chamou aq");
-        return null;
+        return """
+                V       V
+                V       F
+                F       V
+                F       F
+                """;
     }
 
     public void DisjuncaoInclusiva(){
