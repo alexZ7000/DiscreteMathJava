@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.sound.sampled.*;
 
 
 public class Interface extends JFrame implements ActionListener {
@@ -28,14 +30,24 @@ public class Interface extends JFrame implements ActionListener {
     JButton rightParenthesisButton = new JButton(")");
     JButton deleteButton = new JButton("Apagar");
     JLabel label = new JLabel();
-
     ArrayList<String> characters = new ArrayList<>();
     Operations operations = new Operations();
-
 
     public static void main(String[] args)
     {
         new Interface();
+    }
+
+    public void playSound(String soundFileName){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundFileName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error while playing sound.");
+            ex.printStackTrace();
+        }
     }
 
 
@@ -329,11 +341,13 @@ public class Interface extends JFrame implements ActionListener {
             frame.add(label);
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
         ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
         if (e.getSource() == exitButton) {
+            playSound("pop.wav");
             if (JOptionPane.showConfirmDialog(
                     frame,
                     "Deseja realmente fechar o DiscreteMath?",
@@ -342,6 +356,7 @@ public class Interface extends JFrame implements ActionListener {
                 System.exit(0);
         }
         else if (e.getSource() == conjuncaoButton){
+            playSound("pop.wav");
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∧");
                 UpdateUI(false);
@@ -349,6 +364,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == disjuncaoButton){
+            playSound("pop.wav");
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∨");
                 UpdateUI(false);
@@ -356,6 +372,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == calcButton){
+            playSound("pop.wav");
             if (characters.size() > 0 && !lgc.contains(characters.get(characters.size() - 1)))
                 CalcularInterface();
             else{
@@ -365,15 +382,17 @@ public class Interface extends JFrame implements ActionListener {
                         "DiscreteMath",
                         JOptionPane.INFORMATION_MESSAGE
                 );
+                playSound("pop.wav");
             }
         }
         else if (e.getSource() == negacaoButton){
+            playSound("pop.wav");
             characters.add("¬");
             UpdateUI(false);
             System.out.println(characters);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
-
+            playSound("pop.wav");
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("⊕");
                 UpdateUI(false);
@@ -381,6 +400,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == condicionalButton){
+            playSound("pop.wav");
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("→");
                 UpdateUI(false);
@@ -388,6 +408,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == bicondicionalButton){
+            playSound("pop.wav");
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("↔");
                 UpdateUI(false);
@@ -395,6 +416,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == implicacaoButton){
+            playSound("pop.wav");
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
                 UpdateUI(false);
@@ -403,6 +425,7 @@ public class Interface extends JFrame implements ActionListener {
 
         }
         else if (e.getSource() == equivalenciaButton){
+            playSound("pop.wav");
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
                 UpdateUI(false);
@@ -410,6 +433,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoPButton){
+            playSound("pop.wav");
             if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("P");
                 UpdateUI(false);
@@ -417,6 +441,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoQButton){
+            playSound("pop.wav");
             if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("Q");
                 UpdateUI(false);
@@ -424,6 +449,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoRButton){
+            playSound("pop.wav");
             if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("R");
                 UpdateUI(false);
@@ -431,6 +457,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoSButton){
+            playSound("pop.wav");
             if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("S");
                 UpdateUI(false);
@@ -438,6 +465,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == leftParenthesisButton){
+            playSound("pop.wav");
             if (characters.size() > 0) {
                 characters.add("(");
                 UpdateUI(false);
@@ -445,6 +473,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == rightParenthesisButton) {
+            playSound("pop.wav");
             if (characters.contains("(")) {
                 characters.add(")");
                 UpdateUI(false);
@@ -452,6 +481,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == deleteButton){
+            playSound("pop.wav");
             if (characters.size() > 0) {
                 characters.remove(characters.size() - 1);
                 UpdateUI(true);
@@ -460,3 +490,4 @@ public class Interface extends JFrame implements ActionListener {
         }
     }
 }
+
