@@ -52,7 +52,7 @@ public class Operations {
                             
                          
                     """);
-        htmlText.append(title).append("            <tr>V</tr>\n".repeat(Math.max(0, lines)));
+        htmlText.append(title).append("            <tr>V</tr>\n".repeat(Math.max(0, lines))); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
         htmlText.append("</table></body></html> ");
         return htmlText.toString();
     }
