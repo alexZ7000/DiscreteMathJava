@@ -53,8 +53,8 @@ public class Operations {
                          
                     """);
         htmlText.append(title).append("            <tr>V</tr>\n".repeat(Math.max(0, lines))); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
-        htmlText.append("</table></body></html> ");
-        return htmlText.toString();
+        htmlText.append("</table></body></html> "); // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
+        return htmlText.toString(); //thead, tbody e tfoot
     }
 
     public String SeparateOperation(String characters){
