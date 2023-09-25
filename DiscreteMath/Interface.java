@@ -346,8 +346,9 @@ public class Interface extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
         ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
+        String filePath = "C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav";
         if (e.getSource() == exitButton) {
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (JOptionPane.showConfirmDialog(
                     frame,
                     "Deseja realmente fechar o DiscreteMath?",
@@ -356,7 +357,7 @@ public class Interface extends JFrame implements ActionListener {
                 System.exit(0);
         }
         else if (e.getSource() == conjuncaoButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∧");
                 UpdateUI(false);
@@ -364,7 +365,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == disjuncaoButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∨");
                 UpdateUI(false);
@@ -372,8 +373,8 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == calcButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() > 0 && !lgc.contains(characters.get(characters.size() - 1)))
+            playSound(filePath);
+            if (!characters.isEmpty() && !lgc.contains(characters.get(characters.size() - 1)))
                 CalcularInterface();
             else{
                 JOptionPane.showMessageDialog(
@@ -382,17 +383,17 @@ public class Interface extends JFrame implements ActionListener {
                         "DiscreteMath",
                         JOptionPane.INFORMATION_MESSAGE
                 );
-                playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+                playSound(filePath);
             }
         }
         else if (e.getSource() == negacaoButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             characters.add("¬");
             UpdateUI(false);
             System.out.println(characters);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("⊕");
                 UpdateUI(false);
@@ -400,7 +401,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == condicionalButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("→");
                 UpdateUI(false);
@@ -408,7 +409,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == bicondicionalButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("↔");
                 UpdateUI(false);
@@ -416,7 +417,7 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == implicacaoButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
                 UpdateUI(false);
@@ -425,7 +426,7 @@ public class Interface extends JFrame implements ActionListener {
 
         }
         else if (e.getSource() == equivalenciaButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
                 UpdateUI(false);
@@ -433,47 +434,45 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoPButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+            playSound(filePath);
+            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("P");
                 UpdateUI(false);
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoQButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+            playSound(filePath);
+            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("Q");
                 UpdateUI(false);
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoRButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+            playSound(filePath);
+            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("R");
                 UpdateUI(false);
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == proposicaoSButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() == 0 || !prop.contains(characters.get(characters.size() - 1))) {
+            playSound(filePath);
+            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("S");
                 UpdateUI(false);
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == leftParenthesisButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() > 0) {
-                characters.add("(");
-                UpdateUI(false);
-                System.out.println(characters);
-            }
+            playSound(filePath);
+            characters.add("(");
+            UpdateUI(false);
+            System.out.println(characters);
         }
         else if (e.getSource() == rightParenthesisButton) {
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
+            playSound(filePath);
             if (characters.contains("(")) {
                 characters.add(")");
                 UpdateUI(false);
@@ -481,8 +480,8 @@ public class Interface extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource() == deleteButton){
-            playSound("C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav");
-            if (characters.size() > 0) {
+            playSound(filePath);
+            if (!characters.isEmpty()) {
                 characters.remove(characters.size() - 1);
                 UpdateUI(true);
                 System.out.println(characters);
