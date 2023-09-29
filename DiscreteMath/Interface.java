@@ -305,6 +305,13 @@ public class Interface extends JFrame implements ActionListener {
         leftParenthesisButton.addActionListener(this);
         rightParenthesisButton.addActionListener(this);
         deleteButton.addActionListener(this);
+
+        rightParenthesisButton.setEnabled(false);
+        conjuncaoButton.setEnabled(false);
+        disjuncaoButton.setEnabled(false);
+        disjuncaoExclusivaButton.setEnabled(false);
+        condicionalButton.setEnabled(false);
+        bicondicionalButton.setEnabled(false);
     }
 
     private void CalcularInterface(){
@@ -327,7 +334,34 @@ public class Interface extends JFrame implements ActionListener {
         label.setText(result);
     }
 
-    private void UpdateUI(boolean isDelete){
+    private void UpdateButtons(boolean isLogical){
+        if (isLogical){
+            conjuncaoButton.setEnabled(false);
+            disjuncaoButton.setEnabled(false);
+            disjuncaoExclusivaButton.setEnabled(false);
+            condicionalButton.setEnabled(false);
+            bicondicionalButton.setEnabled(false);
+
+            proposicaoPButton.setEnabled(true);
+            proposicaoQButton.setEnabled(true);
+            proposicaoRButton.setEnabled(true);
+            proposicaoSButton.setEnabled(true);
+        }
+        else{
+            conjuncaoButton.setEnabled(true);
+            disjuncaoButton.setEnabled(true);
+            disjuncaoExclusivaButton.setEnabled(true);
+            condicionalButton.setEnabled(true);
+            bicondicionalButton.setEnabled(true);
+
+            proposicaoPButton.setEnabled(false);
+            proposicaoQButton.setEnabled(false);
+            proposicaoRButton.setEnabled(false);
+            proposicaoSButton.setEnabled(false);
+        }
+    }
+
+    private void UpdateUI(){
         label.setFont(new Font("serif", Font.PLAIN, 40));
         label.setBounds(
                 1900/2-200, 290, 800,
@@ -337,16 +371,13 @@ public class Interface extends JFrame implements ActionListener {
         String strCaracters = characters.toString().substring(1, characters.toString().length() - 1);
         strCaracters = strCaracters.replaceAll(",", "");
         label.setText(strCaracters);
-        if (isDelete){
-            frame.add(label);
-        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
         ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
-        String filePath = "C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav";
+        String filePath = "C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav";
         if (e.getSource() == exitButton) {
             playSound(filePath);
             if (JOptionPane.showConfirmDialog(
@@ -360,16 +391,18 @@ public class Interface extends JFrame implements ActionListener {
             playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∧");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(true);
             }
         }
         else if (e.getSource() == disjuncaoButton){
             playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∨");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(true);
             }
         }
         else if (e.getSource() == calcButton){
@@ -389,38 +422,42 @@ public class Interface extends JFrame implements ActionListener {
         else if (e.getSource() == negacaoButton){
             playSound(filePath);
             characters.add("¬");
-            UpdateUI(false);
+            UpdateUI();
             System.out.println(characters);
+            UpdateButtons(true);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
             playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("⊕");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(false);
             }
         }
         else if (e.getSource() == condicionalButton){
             playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("→");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(true);
             }
         }
         else if (e.getSource() == bicondicionalButton){
             playSound(filePath);
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("↔");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(true);
             }
         }
         else if (e.getSource() == implicacaoButton){
             playSound(filePath);
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
             }
 
@@ -429,7 +466,7 @@ public class Interface extends JFrame implements ActionListener {
             playSound(filePath);
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
             }
         }
@@ -437,54 +474,69 @@ public class Interface extends JFrame implements ActionListener {
             playSound(filePath);
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("P");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(false);
             }
         }
         else if (e.getSource() == proposicaoQButton){
             playSound(filePath);
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("Q");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(false);
             }
         }
         else if (e.getSource() == proposicaoRButton){
             playSound(filePath);
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("R");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(false);
             }
         }
         else if (e.getSource() == proposicaoSButton){
             playSound(filePath);
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("S");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
+                UpdateButtons(false);
             }
         }
         else if (e.getSource() == leftParenthesisButton){
             playSound(filePath);
             characters.add("(");
-            UpdateUI(false);
+            UpdateUI();
+            UpdateButtons(true);
+            rightParenthesisButton.setEnabled(true);
             System.out.println(characters);
         }
         else if (e.getSource() == rightParenthesisButton) {
             playSound(filePath);
             if (characters.contains("(")) {
                 characters.add(")");
-                UpdateUI(false);
+                UpdateUI();
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == deleteButton){
             playSound(filePath);
             if (!characters.isEmpty()) {
-                characters.remove(characters.size() - 1);
-                UpdateUI(true);
-                System.out.println(characters);
+                if (!(prop.contains(characters.get(characters.size() - 1)))) {
+                    UpdateButtons(false);
+                    characters.remove(characters.size() - 1);
+                    UpdateUI();
+                    System.out.println(characters);
+                }
+                else{
+                    UpdateButtons(true);
+                    characters.remove(characters.size() - 1);
+                    UpdateUI();
+                    System.out.println(characters);
+                }
             }
         }
     }

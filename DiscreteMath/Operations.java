@@ -1,34 +1,47 @@
 package DiscreteMath;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Operations {
-    public int numberOfLines(String characters) {
+    public void numberOfLines(String characters) {
         int lines = 0;
-        if (characters.contains("P")) {
-            lines = 2;
-            if (characters.contains("Q")) {
-                lines = 4;
-                if (characters.contains("R")) {
-                    lines = 8;
-                    if (characters.contains("S")) {
-                        lines = 16;
-                    }
-                }
+        String title = null, expression = null;
+        for (int i = 0; i < characters.length(); i++) {
+            if (
+                    characters.charAt(i) == 'P' ||
+                    characters.charAt(i) == 'Q' ||
+                    characters.charAt(i) == 'R' ||
+                    characters.charAt(i) == 'S' ||
+                    characters.charAt(i) == 'T'
+            ) {
+                title = "<th>" + characters.charAt(i) + "</th>";
+                expression = "<td>" + characters + "</td>";
+                lines++;
             }
         }
-        System.out.println(lines);
-        return lines;
+        if (lines == 1)
+            lines = 2;
+        else if (lines == 2)
+            lines = 4;
+        else if (lines == 3)
+            lines = 8;
+        else if (lines == 4)
+            lines = 16;
+        else{
+            System.out.println("Erro");
+        }
+        TitleConstructor(lines, title, expression);
     }
 
-    public String TitleConstructor(int lines, String separator, String characters) {
-        String title = "<h1>" + characters + "</h1>";
+    public String TitleConstructor(int lines, String title, String expression) {
+        String title1 = "<h1>" + title + "</h1>";
         StringBuilder subtitle = new StringBuilder();
 
         return title;
     }
 
-    public String TableConstructor(int lines, String title){
+    public String TableConstructor(String title){
         StringBuilder htmlText = new StringBuilder("""
                    <html>
                      <head>
@@ -52,24 +65,20 @@ public class Operations {
                             
                          
                     """);
-        htmlText.append(title).append("            <tr>V</tr>\n".repeat(Math.max(0, lines))); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
+        htmlText.append(title).append("<tr>V</tr>\n".repeat(Math.max(0, 4))); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
         htmlText.append("</table></body></html> "); // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
         return htmlText.toString(); //thead, tbody e tfoot
     }
-
-    public String SeparateOperation(String characters){
-        return null;
-    }
-
     public void Conjuncao(){
         System.out.print("chamou aq");
     }
 
     public String resultOperation(String characters){
-        int lines = numberOfLines(characters);
-        String separator = SeparateOperation(characters);
-        String title = TitleConstructor(lines,separator, characters);
-        return TableConstructor(lines, title);
+        String strCaracters = characters.substring(1, characters.length() - 1);
+        strCaracters = strCaracters.replaceAll(",", "");
+        numberOfLines(strCaracters);
+        String title = TitleConstructor(4, "separator", characters);
+        return TableConstructor(title);
     }
 
 
