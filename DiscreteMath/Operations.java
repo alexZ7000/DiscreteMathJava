@@ -1,8 +1,5 @@
 package DiscreteMath;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Operations {
     public void numberOfLines(String characters) {
         int lines = 0;
@@ -15,9 +12,15 @@ public class Operations {
                     characters.charAt(i) == 'S' ||
                     characters.charAt(i) == 'T'
             ) {
-                title = "<th>" + characters.charAt(i) + "</th>";
-                expression = "<td>" + characters + "</td>";
                 lines++;
+            }
+        }
+        StringBuilder letras = new StringBuilder();
+
+        for (int i = 0; i < characters.length(); i++) {
+            char caractere = characters.charAt(i);
+            if (Character.isLetter(caractere)) {
+                letras.append(caractere);
             }
         }
         if (lines == 1)
@@ -28,20 +31,21 @@ public class Operations {
             lines = 8;
         else if (lines == 4)
             lines = 16;
-        else{
-            System.out.println("Erro");
+        TitleConstructor(lines, letras);
+    }
+
+    public void TitleConstructor(int lines, StringBuilder letras) {
+        StringBuilder title = new StringBuilder();
+        for (int j = 0; j < letras.length(); j++) {
+            // Obter a letra na posição j
+            char l = letras.charAt(j);
+            // Concatenar os title "<th>"+letra+"</th>" e adicionar ao StringBuilder title
+            title.append("<th>").append(l).append("</th>");
         }
-        TitleConstructor(lines, title, expression);
+        TableConstructor(title);
     }
 
-    public String TitleConstructor(int lines, String title, String expression) {
-        String title1 = "<h1>" + title + "</h1>";
-        StringBuilder subtitle = new StringBuilder();
-
-        return title;
-    }
-
-    public String TableConstructor(String title){
+    public void TableConstructor(StringBuilder title){
         StringBuilder htmlText = new StringBuilder("""
                    <html>
                      <head>
@@ -60,27 +64,26 @@ public class Operations {
                      </head>
                      <body>
                          <table>
-                            
-                            
-                            
-                         
                     """);
-        htmlText.append(title).append("<tr>V</tr>\n".repeat(Math.max(0, 4))); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
-        htmlText.append("</table></body></html> "); // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
-        return htmlText.toString(); //thead, tbody e tfoot
+        htmlText.append(title); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
+        htmlText.append("</table></body></html> ");
+        var fds = new Interface();
+        fds.exibirCalculoDaInterface(htmlText.toString());
+        //TODO: Corrijir Bug da criação de outras janelas, e arrumar a tabela que só exibe suas letras e não exibe a operação
+        // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
+        //thead, tbody e tfoot
     }
+
+    public void resultOperation(String characters){
+        String strCaracters = characters.substring(1, characters.length() - 1);
+        System.out.print(strCaracters);
+        strCaracters = strCaracters.replaceAll(",", "");
+        numberOfLines(strCaracters);
+    }
+
     public void Conjuncao(){
         System.out.print("chamou aq");
     }
-
-    public String resultOperation(String characters){
-        String strCaracters = characters.substring(1, characters.length() - 1);
-        strCaracters = strCaracters.replaceAll(",", "");
-        numberOfLines(strCaracters);
-        String title = TitleConstructor(4, "separator", characters);
-        return TableConstructor(title);
-    }
-
 
     public void DisjuncaoInclusiva(){
         System.out.print("chamou aq");

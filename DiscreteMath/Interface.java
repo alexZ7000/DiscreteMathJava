@@ -315,9 +315,10 @@ public class Interface extends JFrame implements ActionListener {
     }
 
     private void CalcularInterface(){
-        String strCaracters = characters.toString().substring(1, characters.toString().length() - 1);
-        strCaracters = strCaracters.replaceAll(",", "");
-        String result = operations.resultOperation(String.valueOf(characters));
+        operations.resultOperation(String.valueOf(characters));
+    }
+
+    public void exibirCalculoDaInterface(String result){
         JOptionPane.showMessageDialog(
                 frame,
                 result,
@@ -336,6 +337,18 @@ public class Interface extends JFrame implements ActionListener {
 
     private void UpdateButtons(boolean isLogical){
         if (isLogical){
+            conjuncaoButton.setEnabled(false);
+            disjuncaoButton.setEnabled(false);
+            disjuncaoExclusivaButton.setEnabled(false);
+            condicionalButton.setEnabled(false);
+            bicondicionalButton.setEnabled(false);
+
+            proposicaoPButton.setEnabled(true);
+            proposicaoQButton.setEnabled(true);
+            proposicaoRButton.setEnabled(true);
+            proposicaoSButton.setEnabled(true);
+        }
+        else if(characters.isEmpty()){
             conjuncaoButton.setEnabled(false);
             disjuncaoButton.setEnabled(false);
             disjuncaoExclusivaButton.setEnabled(false);
@@ -377,7 +390,7 @@ public class Interface extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
         ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
-        String filePath = "C:\\Users\\23.01172-6\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav";
+        String filePath = "C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav";
         if (e.getSource() == exitButton) {
             playSound(filePath);
             if (JOptionPane.showConfirmDialog(
@@ -432,7 +445,7 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("⊕");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(false);
+                UpdateButtons(true);
             }
         }
         else if (e.getSource() == condicionalButton){
@@ -458,6 +471,7 @@ public class Interface extends JFrame implements ActionListener {
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
                 UpdateUI();
+                UpdateButtons(true);
                 System.out.println(characters);
             }
 
@@ -467,6 +481,7 @@ public class Interface extends JFrame implements ActionListener {
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
                 UpdateUI();
+                UpdateButtons(true);
                 System.out.println(characters);
             }
         }
