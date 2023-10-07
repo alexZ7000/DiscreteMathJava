@@ -11,42 +11,45 @@ import javax.sound.sampled.*;
 
 
 public class Interface implements ActionListener {
-    JFrame frame = new JFrame();
-    JButton calcButton = new JButton("Calcular");
-    JButton exitButton = new JButton("Fechar DiscreteMath");
-    JButton conjuncaoButton = new JButton("∧");
-    JButton disjuncaoButton = new JButton("∨");
-    JButton negacaoButton = new JButton("¬");
-    JButton disjuncaoExclusivaButton = new JButton("⊕");
-    JButton condicionalButton = new JButton("→");
-    JButton bicondicionalButton = new JButton("↔");
-    JButton implicacaoButton = new JButton("⇒");
-    JButton equivalenciaButton = new JButton("≡");
-    JButton proposicaoPButton = new JButton("P");
-    JButton proposicaoQButton = new JButton("Q");
-    JButton proposicaoRButton = new JButton("R");
-    JButton proposicaoSButton = new JButton("S");
-    JButton leftParenthesisButton = new JButton("(");
-    JButton rightParenthesisButton = new JButton(")");
-    JButton deleteButton = new JButton("Apagar");
-    JLabel label = new JLabel();
-    JLabel resultLabel = new JLabel();
-    ArrayList<String> characters = new ArrayList<>();
-    Operations operations = new Operations(Interface.this);
+    private final JFrame frame = new JFrame();
+    private final JButton calcButton = new JButton("Calcular");
+    private final JButton exitButton = new JButton("Fechar DiscreteMath");
+    private final JButton conjuncaoButton = new JButton("∧");
+    private final JButton disjuncaoButton = new JButton("∨");
+    private final JButton negacaoButton = new JButton("¬");
+    private final JButton disjuncaoExclusivaButton = new JButton("⊕");
+    private final JButton condicionalButton = new JButton("→");
+    private final JButton bicondicionalButton = new JButton("↔");
+    private final JButton implicacaoButton = new JButton("⇒");
+    private final JButton equivalenciaButton = new JButton("≡");
+    private final JButton proposicaoPButton = new JButton("P");
+    private final JButton proposicaoQButton = new JButton("Q");
+    private final JButton proposicaoRButton = new JButton("R");
+    private final JButton proposicaoSButton = new JButton("S");
+    private final JButton leftParenthesisButton = new JButton("(");
+    private final JButton rightParenthesisButton = new JButton(")");
+    private final JButton deleteButton = new JButton("Apagar");
+    private final JLabel label = new JLabel();
+    private final JLabel resultLabel = new JLabel();
+    private final ArrayList<String> characters = new ArrayList<>();
+    private final Operations operations = new Operations(Interface.this);
+
+    private final ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
+    private final ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
 
     public static void main (String[] args){
         new Interface();
     }
 
-    public void playSound(String soundFileName){
+    private void playSound(){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundFileName).getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
         } catch (Exception ex) {
-            System.out.println("Error while playing sound.");
-            ex.printStackTrace();
+            throw new IllegalCallerException("Este arquivo não existe: ", ex);
+
         }
     }
 
@@ -304,8 +307,6 @@ public class Interface implements ActionListener {
         leftParenthesisButton.addActionListener(this);
         rightParenthesisButton.addActionListener(this);
         deleteButton.addActionListener(this);
-
-
     }
 
     private void CalcularInterface(){
@@ -342,11 +343,8 @@ public class Interface implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
-        ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
-        String filePath = "C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav";
         if (e.getSource() == exitButton) {
-            playSound(filePath);
+            playSound();
             if (JOptionPane.showConfirmDialog(
                     frame,
                     "Deseja realmente fechar o DiscreteMath?",
@@ -355,7 +353,7 @@ public class Interface implements ActionListener {
                 System.exit(0);
         }
         else if (e.getSource() == conjuncaoButton){
-            playSound(filePath);
+            playSound();
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∧");
                 UpdateUI();
@@ -363,7 +361,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == disjuncaoButton){
-            playSound(filePath);
+            playSound();
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("∨");
                 UpdateUI();
@@ -371,7 +369,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == calcButton){
-            playSound(filePath);
+            playSound();
             if (!characters.isEmpty() && !lgc.contains(characters.get(characters.size() - 1)))
                 CalcularInterface();
             else{
@@ -381,17 +379,17 @@ public class Interface implements ActionListener {
                         "DiscreteMath",
                         JOptionPane.INFORMATION_MESSAGE
                 );
-                playSound(filePath);
+                playSound();
             }
         }
         else if (e.getSource() == negacaoButton){
-            playSound(filePath);
+            playSound();
             characters.add("¬");
             UpdateUI();
             System.out.println(characters);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
-            playSound(filePath);
+            playSound();
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("⊕");
                 UpdateUI();
@@ -399,7 +397,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == condicionalButton){
-            playSound(filePath);
+            playSound();
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("→");
                 UpdateUI();
@@ -407,7 +405,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == bicondicionalButton){
-            playSound(filePath);
+            playSound();
             if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("↔");
                 UpdateUI();
@@ -415,7 +413,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == implicacaoButton){
-            playSound(filePath);
+            playSound();
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
                 UpdateUI();
@@ -424,7 +422,7 @@ public class Interface implements ActionListener {
 
         }
         else if (e.getSource() == equivalenciaButton){
-            playSound(filePath);
+            playSound();
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
                 UpdateUI();
@@ -432,7 +430,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoPButton){
-            playSound(filePath);
+            playSound();
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("P");
                 UpdateUI();
@@ -440,7 +438,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoQButton){
-            playSound(filePath);
+            playSound();
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("Q");
                 UpdateUI();
@@ -448,7 +446,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoRButton){
-            playSound(filePath);
+            playSound();
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("R");
                 UpdateUI();
@@ -456,7 +454,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == proposicaoSButton){
-            playSound(filePath);
+            playSound();
             if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
                 characters.add("S");
                 UpdateUI();
@@ -464,14 +462,14 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == leftParenthesisButton){
-            playSound(filePath);
+            playSound();
             characters.add("(");
             UpdateUI();
             rightParenthesisButton.setEnabled(true);
             System.out.println(characters);
         }
         else if (e.getSource() == rightParenthesisButton) {
-            playSound(filePath);
+            playSound();
             if (characters.contains("(")) {
                 characters.add(")");
                 UpdateUI();
@@ -479,7 +477,7 @@ public class Interface implements ActionListener {
             }
         }
         else if (e.getSource() == deleteButton){
-            playSound(filePath);
+            playSound();
             if (!characters.isEmpty()) {
                 characters.remove(characters.size() - 1);
                 UpdateUI();

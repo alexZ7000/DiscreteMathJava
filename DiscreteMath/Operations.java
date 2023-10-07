@@ -1,6 +1,8 @@
 package DiscreteMath;
 
 
+import java.util.HashSet;
+import java.util.Set;
 
 public class Operations {
     private final Interface interface1;
@@ -9,28 +11,24 @@ public class Operations {
         this.interface1 = instanciaClasseA;
     }
 
-    private void numberOfLines(String characters) {
+    private void numberOfLines(final String characters) {
         int lines = 0;
-        String title = null, expression = null;
+        // Criar um conjunto vazio
+        StringBuilder letrasEncontradas = new StringBuilder();
         for (int i = 0; i < characters.length(); i++) {
-            if (
-                    characters.charAt(i) == 'P' ||
-                    characters.charAt(i) == 'Q' ||
-                    characters.charAt(i) == 'R' ||
-                    characters.charAt(i) == 'S' ||
-                    characters.charAt(i) == 'T'
-            ) {
-                lines++;
+            // Obter o caractere na posição i
+            char c = characters.charAt(i);
+            // Verificar se o caractere é P, Q, R ou S
+            if (c == 'P' || c == 'Q' || c == 'R' || c == 'S') {
+                // Verificar se o caractere já está no conjunto
+                if (!(letrasEncontradas.toString()).contains(String.valueOf(c))) {
+                    // Se não estiver, adicionar ao conjunto e incrementar a contagem
+                    letrasEncontradas.append(c);
+                    lines++;
+                }
             }
         }
-        StringBuilder letras = new StringBuilder();
 
-        for (int i = 0; i < characters.length(); i++) {
-            char caractere = characters.charAt(i);
-            if (Character.isLetter(caractere)) {
-                letras.append(caractere);
-            }
-        }
         if (lines == 1)
             lines = 2;
         else if (lines == 2)
@@ -39,10 +37,11 @@ public class Operations {
             lines = 8;
         else if (lines == 4)
             lines = 16;
-        TitleConstructor(lines, letras);
+        System.out.println("\n" + lines);
+        TitleConstructor(letrasEncontradas, lines);
     }
 
-    private void TitleConstructor(int lines, StringBuilder letras) {
+    private void TitleConstructor(final StringBuilder letras, final int lines) {
         StringBuilder title = new StringBuilder();
         for (int j = 0; j < letras.length(); j++) {
             // Obter a letra na posição j
@@ -53,91 +52,36 @@ public class Operations {
         TableConstructor(title);
     }
 
-    private void TableConstructor(StringBuilder title){
-        StringBuilder htmlText = new StringBuilder("""
-                   <html>
-                     <head>
-                         <style>
-                             table {
-                                 border-collapse: collapse;
-                             }
-                             table, th, td {
-                                 border: 1px solid black;
-                                 text-align: center;
-                             }
-                             th, td {
-                                 padding: 10px;
-                             }
-                         </style>
-                     </head>
-                     <body>
-                         <table>
-                    """);
-        htmlText.append(title); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
-        htmlText.append("</table></body></html> ");
-        interface1.exibirCalculoDaInterface(htmlText.toString());
+    private void TableConstructor(final StringBuilder title){
+        final String htmlText = """
+                <html>
+                  <head>
+                      <style>
+                          table {
+                              border-collapse: collapse;
+                          }
+                          table, th, td {
+                              border: 1px solid black;
+                              text-align: center;
+                          }
+                          th, td {
+                              padding: 10px;
+                          }
+                      </style>
+                  </head>
+                  <body>
+                      <table>
+                 """ + title + // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
+                "</table></body></html> ";
+        interface1.exibirCalculoDaInterface(htmlText);
         //TODO: Arrumar a tabela que só exibe suas letras e não exibe a operação
         // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
         //thead, tbody e tfoot
     }
 
-    public void resultOperation(String characters){
-        String strCaracters = characters.substring(1, characters.length() - 1);
+    public void resultOperation(final String characters){
+        final String strCaracters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
         System.out.print(strCaracters);
-        strCaracters = strCaracters.replaceAll(",", "");
         numberOfLines(strCaracters);
-    }
-
-    public void Conjuncao(){
-        System.out.print("chamou aq");
-    }
-
-    public void DisjuncaoInclusiva(){
-        System.out.print("chamou aq");
-    }
-
-    public void Negacao(){
-        System.out.print("chamou aq");
-    }
-
-    public Object DisjuncaoExclusiva(){
-        System.out.print("chamou aq");
-        return null;
-    }
-
-    public void Condicional(){
-        System.out.print("chamou aq");
-    }
-
-    public void Bicondicional(){
-        System.out.print("chamou aq");
-    }
-
-    public void Tautologia(){
-        System.out.print("chamou aq");
-    }
-
-    public void Contradiacao(){
-        System.out.print("chamou aq");
-    }
-
-    public void Contingencia(){
-        System.out.print("chamou aq");
-    }
-
-    public void Equivalencia(){
-        System.out.print("chamou aq");
-    }
-
-    public void Validade(){
-        System.out.print("chamou aq");
-    }
-
-    public void Satisfativel(){
-        System.out.print("chamou aq");
-    }
-
-    public void Insatisfativel(){
-        System.out.print("chamou aq");
     }
 }
