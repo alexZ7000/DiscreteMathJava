@@ -1,7 +1,15 @@
 package DiscreteMath;
 
+
+
 public class Operations {
-    public void numberOfLines(String characters) {
+    private final Interface interface1;
+
+    public Operations(Interface instanciaClasseA) {
+        this.interface1 = instanciaClasseA;
+    }
+
+    private void numberOfLines(String characters) {
         int lines = 0;
         String title = null, expression = null;
         for (int i = 0; i < characters.length(); i++) {
@@ -34,7 +42,7 @@ public class Operations {
         TitleConstructor(lines, letras);
     }
 
-    public void TitleConstructor(int lines, StringBuilder letras) {
+    private void TitleConstructor(int lines, StringBuilder letras) {
         StringBuilder title = new StringBuilder();
         for (int j = 0; j < letras.length(); j++) {
             // Obter a letra na posição j
@@ -45,7 +53,7 @@ public class Operations {
         TableConstructor(title);
     }
 
-    public void TableConstructor(StringBuilder title){
+    private void TableConstructor(StringBuilder title){
         StringBuilder htmlText = new StringBuilder("""
                    <html>
                      <head>
@@ -67,9 +75,8 @@ public class Operations {
                     """);
         htmlText.append(title); // td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
         htmlText.append("</table></body></html> ");
-        var fds = new Interface();
-        fds.exibirCalculoDaInterface(htmlText.toString());
-        //TODO: Corrijir Bug da criação de outras janelas, e arrumar a tabela que só exibe suas letras e não exibe a operação
+        interface1.exibirCalculoDaInterface(htmlText.toString());
+        //TODO: Arrumar a tabela que só exibe suas letras e não exibe a operação
         // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
         //thead, tbody e tfoot
     }

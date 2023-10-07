@@ -10,7 +10,7 @@ import java.util.Arrays;
 import javax.sound.sampled.*;
 
 
-public class Interface extends JFrame implements ActionListener {
+public class Interface implements ActionListener {
     JFrame frame = new JFrame();
     JButton calcButton = new JButton("Calcular");
     JButton exitButton = new JButton("Fechar DiscreteMath");
@@ -30,11 +30,11 @@ public class Interface extends JFrame implements ActionListener {
     JButton rightParenthesisButton = new JButton(")");
     JButton deleteButton = new JButton("Apagar");
     JLabel label = new JLabel();
+    JLabel resultLabel = new JLabel();
     ArrayList<String> characters = new ArrayList<>();
-    Operations operations = new Operations();
+    Operations operations = new Operations(Interface.this);
 
-    public static void main(String[] args)
-    {
+    public static void main (String[] args){
         new Interface();
     }
 
@@ -50,8 +50,7 @@ public class Interface extends JFrame implements ActionListener {
         }
     }
 
-
-    Interface() {
+    public Interface() {
 
         // definindo propriedades do meu frame
         int x = 1900, y = 1000;
@@ -306,12 +305,7 @@ public class Interface extends JFrame implements ActionListener {
         rightParenthesisButton.addActionListener(this);
         deleteButton.addActionListener(this);
 
-        rightParenthesisButton.setEnabled(false);
-        conjuncaoButton.setEnabled(false);
-        disjuncaoButton.setEnabled(false);
-        disjuncaoExclusivaButton.setEnabled(false);
-        condicionalButton.setEnabled(false);
-        bicondicionalButton.setEnabled(false);
+
     }
 
     private void CalcularInterface(){
@@ -325,53 +319,13 @@ public class Interface extends JFrame implements ActionListener {
                 "DiscreteMath",
                 JOptionPane.INFORMATION_MESSAGE
         );
-        JLabel label = new JLabel();
-        label.setFont(new Font("serif", Font.PLAIN, 20));
-        label.setBounds(
+        resultLabel.setFont(new Font("serif", Font.PLAIN, 20));
+        resultLabel.setBounds(
                 1900/2+300, 450, 1200,
                 550
         );
-        frame.add(label);
-        label.setText(result);
-    }
-
-    private void UpdateButtons(boolean isLogical){
-        if (isLogical){
-            conjuncaoButton.setEnabled(false);
-            disjuncaoButton.setEnabled(false);
-            disjuncaoExclusivaButton.setEnabled(false);
-            condicionalButton.setEnabled(false);
-            bicondicionalButton.setEnabled(false);
-
-            proposicaoPButton.setEnabled(true);
-            proposicaoQButton.setEnabled(true);
-            proposicaoRButton.setEnabled(true);
-            proposicaoSButton.setEnabled(true);
-        }
-        else if(characters.isEmpty()){
-            conjuncaoButton.setEnabled(false);
-            disjuncaoButton.setEnabled(false);
-            disjuncaoExclusivaButton.setEnabled(false);
-            condicionalButton.setEnabled(false);
-            bicondicionalButton.setEnabled(false);
-
-            proposicaoPButton.setEnabled(true);
-            proposicaoQButton.setEnabled(true);
-            proposicaoRButton.setEnabled(true);
-            proposicaoSButton.setEnabled(true);
-        }
-        else{
-            conjuncaoButton.setEnabled(true);
-            disjuncaoButton.setEnabled(true);
-            disjuncaoExclusivaButton.setEnabled(true);
-            condicionalButton.setEnabled(true);
-            bicondicionalButton.setEnabled(true);
-
-            proposicaoPButton.setEnabled(false);
-            proposicaoQButton.setEnabled(false);
-            proposicaoRButton.setEnabled(false);
-            proposicaoSButton.setEnabled(false);
-        }
+        frame.add(resultLabel);
+        resultLabel.setText(result);
     }
 
     private void UpdateUI(){
@@ -406,7 +360,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("∧");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(true);
             }
         }
         else if (e.getSource() == disjuncaoButton){
@@ -415,7 +368,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("∨");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(true);
             }
         }
         else if (e.getSource() == calcButton){
@@ -437,7 +389,6 @@ public class Interface extends JFrame implements ActionListener {
             characters.add("¬");
             UpdateUI();
             System.out.println(characters);
-            UpdateButtons(true);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
             playSound(filePath);
@@ -445,7 +396,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("⊕");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(true);
             }
         }
         else if (e.getSource() == condicionalButton){
@@ -454,7 +404,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("→");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(true);
             }
         }
         else if (e.getSource() == bicondicionalButton){
@@ -463,7 +412,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("↔");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(true);
             }
         }
         else if (e.getSource() == implicacaoButton){
@@ -471,7 +419,6 @@ public class Interface extends JFrame implements ActionListener {
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
                 UpdateUI();
-                UpdateButtons(true);
                 System.out.println(characters);
             }
 
@@ -481,7 +428,6 @@ public class Interface extends JFrame implements ActionListener {
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
                 UpdateUI();
-                UpdateButtons(true);
                 System.out.println(characters);
             }
         }
@@ -491,7 +437,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("P");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(false);
             }
         }
         else if (e.getSource() == proposicaoQButton){
@@ -500,7 +445,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("Q");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(false);
             }
         }
         else if (e.getSource() == proposicaoRButton){
@@ -509,7 +453,6 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("R");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(false);
             }
         }
         else if (e.getSource() == proposicaoSButton){
@@ -518,14 +461,12 @@ public class Interface extends JFrame implements ActionListener {
                 characters.add("S");
                 UpdateUI();
                 System.out.println(characters);
-                UpdateButtons(false);
             }
         }
         else if (e.getSource() == leftParenthesisButton){
             playSound(filePath);
             characters.add("(");
             UpdateUI();
-            UpdateButtons(true);
             rightParenthesisButton.setEnabled(true);
             System.out.println(characters);
         }
@@ -540,18 +481,9 @@ public class Interface extends JFrame implements ActionListener {
         else if (e.getSource() == deleteButton){
             playSound(filePath);
             if (!characters.isEmpty()) {
-                if (!(prop.contains(characters.get(characters.size() - 1)))) {
-                    UpdateButtons(false);
-                    characters.remove(characters.size() - 1);
-                    UpdateUI();
-                    System.out.println(characters);
-                }
-                else{
-                    UpdateButtons(true);
-                    characters.remove(characters.size() - 1);
-                    UpdateUI();
-                    System.out.println(characters);
-                }
+                characters.remove(characters.size() - 1);
+                UpdateUI();
+                System.out.println(characters);
             }
         }
     }
