@@ -32,6 +32,7 @@ public class Interface implements ActionListener {
     private final JLabel label = new JLabel();
     private final JLabel resultLabel = new JLabel();
     private final ArrayList<String> characters = new ArrayList<>();
+    private final Font font = new Font("serif", Font.PLAIN, 40);
     private final Operations operations = new Operations(Interface.this);
 
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
@@ -54,7 +55,7 @@ public class Interface implements ActionListener {
     }
 
     public Interface() {
-
+        playSound();
         // definindo propriedades do meu frame
         int x = 1900, y = 1000;
         frame.setSize(x, y);
@@ -309,11 +310,11 @@ public class Interface implements ActionListener {
         deleteButton.addActionListener(this);
     }
 
-    private void CalcularInterface(){
+    private void calculateOperations(){
         operations.resultOperation(String.valueOf(characters), characters);
     }
 
-    public void exibirCalculoDaInterface(String result){
+    public void showCalculationInInterface(String result){
         JOptionPane.showMessageDialog(
                 frame,
                 result,
@@ -329,8 +330,8 @@ public class Interface implements ActionListener {
         resultLabel.setText(result);
     }
 
-    private void UpdateUI(){
-        label.setFont(new Font("serif", Font.PLAIN, 40));
+    private void updateUI(){
+        label.setFont(font);
         label.setBounds(
                 1900/2-200, 290, 800,
                 100
@@ -356,7 +357,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("∧");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -364,14 +365,14 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("∨");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == calcButton){
             playSound();
             if (!characters.isEmpty() && !logicalOperators.contains(characters.get(characters.size() - 1)))
-                CalcularInterface();
+                calculateOperations();
             else{
                 JOptionPane.showMessageDialog(
                         frame,
@@ -385,14 +386,14 @@ public class Interface implements ActionListener {
         else if (e.getSource() == negacaoButton){
             playSound();
             characters.add("¬");
-            UpdateUI();
+            updateUI();
             System.out.println(characters);
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
             playSound();
             if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("⊕");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -400,7 +401,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("→");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -408,7 +409,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("↔");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -416,7 +417,7 @@ public class Interface implements ActionListener {
             playSound();
             if (!characters.contains("⇒") && !characters.contains("⇔")) {
                 characters.add("⇒");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
 
@@ -425,7 +426,7 @@ public class Interface implements ActionListener {
             playSound();
             if (!characters.contains("⇔") && !characters.contains("⇔")) {
                 characters.add("⇔");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -433,7 +434,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("P");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -441,7 +442,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("Q");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -449,7 +450,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("R");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -457,14 +458,14 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("S");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
         else if (e.getSource() == leftParenthesisButton){
             playSound();
             characters.add("(");
-            UpdateUI();
+            updateUI();
             rightParenthesisButton.setEnabled(true);
             System.out.println(characters);
         }
@@ -472,7 +473,7 @@ public class Interface implements ActionListener {
             playSound();
             if (characters.contains("(")) {
                 characters.add(")");
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }
@@ -480,7 +481,7 @@ public class Interface implements ActionListener {
             playSound();
             if (!characters.isEmpty()) {
                 characters.remove(characters.size() - 1);
-                UpdateUI();
+                updateUI();
                 System.out.println(characters);
             }
         }

@@ -15,7 +15,7 @@ public class Operations {
         this.instanceInterface = instanciaInterface;
     }
 
-    private void numberOfLines(final String characters, final ArrayList<String> arrayCharacters) {
+    private void calculateNumberOfLines(final String characters, final ArrayList<String> arrayCharacters) {
         int lines = 0;
         letrasEncontradas.setLength(0);
         for (int i = 0; i < characters.length(); i++) {
@@ -58,7 +58,7 @@ public class Operations {
     }
 
     private void TableConstructor(final StringBuilder title){
-        final String htmlText = """
+        final String htmlTable = """
                 <html>
                   <head>
                       <style>
@@ -78,7 +78,7 @@ public class Operations {
                       <table>
                  """ + title +// td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
                 "</table></body></html> ";
-        instanceInterface.exibirCalculoDaInterface(htmlText);
+        instanceInterface.showCalculationInInterface(htmlTable);
         //TODO: Arrumar a tabela que só exibe suas letras e não exibe a operação
         // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
         //thead, tbody e tfoot
@@ -86,10 +86,10 @@ public class Operations {
 
     public void resultOperation(final String characters, final ArrayList<String> arrayCharacters) {
         final String strCaracters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
-        numberOfLines(strCaracters, arrayCharacters);
+        calculateNumberOfLines(strCaracters, arrayCharacters);
     }
 
-    private StringBuilder detectLogicalOperator(final ArrayList<String> arrayCharacters, final StringBuilder letrasEncontradas){
+    private void detectLogicalOperator(final ArrayList<String> arrayCharacters, final StringBuilder letrasEncontradas){
         vAndF.setLength(0);
         for (String c : arrayCharacters) {
             if (logicalOperators.contains(c)) {
@@ -100,16 +100,17 @@ public class Operations {
                 exclusiveDisjunction(true, true);
                 conditional(true, true);
                 biconditional(true, true);
-                return simpleProposition(letrasEncontradas);
+                simpleProposition(letrasEncontradas);
+                return;
             }
             else {
-                return simpleProposition(letrasEncontradas);
+                simpleProposition(letrasEncontradas);
+                return;
             }
         }
-        return null;
     }
 
-    private StringBuilder simpleProposition(final StringBuilder characters) {
+    private void simpleProposition(final StringBuilder characters) {
         int numberOfPropositions = characters.length();
         if (numberOfPropositions == 1){
             vAndF.append("""
@@ -120,7 +121,6 @@ public class Operations {
                                 <td>F</td>
                             </tr>
                     """);
-            return vAndF;
         }
 
         else if (numberOfPropositions == 2){
@@ -128,7 +128,6 @@ public class Operations {
         }
         else if (numberOfPropositions == 3){}
         else if (numberOfPropositions == 4){}
-        return null;
     }
 
     private boolean negation(final boolean p) {
