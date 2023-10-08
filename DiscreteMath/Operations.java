@@ -1,29 +1,27 @@
 package DiscreteMath;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Operations {
     private final StringBuilder letrasEncontradas = new StringBuilder();
     private final StringBuilder vAndF = new StringBuilder();
     private final StringBuilder title = new StringBuilder();
-    private boolean vAndFAdded = false;
-    private final Interface interface1;
+    private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "(", ")"));
+    private final Interface instanceInterface;
 
-    public Operations(Interface instanciaClasseA) {
-        this.interface1 = instanciaClasseA;
+    public Operations(Interface instanciaInterface) {
+        this.instanceInterface = instanciaInterface;
     }
 
-    private void numberOfLines(final String characters) {
+    private void numberOfLines(final String characters, final ArrayList<String> arrayCharacters) {
         int lines = 0;
         letrasEncontradas.setLength(0);
-        vAndF.setLength(0);
         for (int i = 0; i < characters.length(); i++) {
-            // Obter o caractere na posição i
             char c = characters.charAt(i);
-            // Verificar se o caractere é P, Q, R ou S
             if (c == 'P' || c == 'Q' || c == 'R' || c == 'S') {
-                // Verificar se o caractere já está no conjunto
                 if (!(letrasEncontradas.toString()).contains(String.valueOf(c))) {
-                    // Se não estiver, adicionar ao conjunto e incrementar a contagem
                     letrasEncontradas.append(c);
                     lines++;
                 }
@@ -32,24 +30,17 @@ public class Operations {
 
         if (lines == 1){
             lines = 2;
-            vAndF.append("<td>V</td>\n".repeat(lines /2));
-            vAndF.append("<td>F</td>\n".repeat(lines /2));
         }
         else if (lines == 2) {
             lines = 4;
-            vAndF.append("<td>V</td>\n".repeat(lines /2));
-            vAndF.append("<td>F</td>\n".repeat(lines /2));
         }
         else if (lines == 3) {
             lines = 8;
-            vAndF.append("<td>V</td>\n".repeat(lines /2));
-            vAndF.append("<td>F</td>\n".repeat(lines /2));
         }
         else if (lines == 4) {
             lines = 16;
-            vAndF.append("<td>V</td>\n".repeat(lines /2));
-            vAndF.append("<td>F</td>\n".repeat(lines /2));
         }
+        detectLogicalOperator(arrayCharacters, letrasEncontradas);
         TitleConstructor(letrasEncontradas, lines, vAndF);
     }
 
@@ -57,25 +48,14 @@ public class Operations {
         title.setLength(0);
         title.append("<tr>");
         for (int j = 0; j < letras.length(); j++) {
-            // Obter a letra na posição j
             char l = letras.charAt(j);
-            // Concatenar os title "<th>"+letra+"</th>" e adicionar ao StringBuilder title
             title.append("<th>").append(l).append("</th>");
         }
         title.append("</tr>");
-        for (int i = 0; i < lines; i++) {
-            title.append("<tr>");
-            for (int j = 0; j < letras.length(); j++) {
-                title.append("<td>").append("v").append("</td>");
-            }
-            title.append("</tr>");
-        }
-        title.append("</tr>");
+        title.append(vAndF);
         // TODO: Melhorar a lógica de adicionar V e F na tabela
         TableConstructor(title);
     }
-
-
 
     private void TableConstructor(final StringBuilder title){
         final String htmlText = """
@@ -98,14 +78,80 @@ public class Operations {
                       <table>
                  """ + title +// td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
                 "</table></body></html> ";
-        interface1.exibirCalculoDaInterface(htmlText);
+        instanceInterface.exibirCalculoDaInterface(htmlText);
         //TODO: Arrumar a tabela que só exibe suas letras e não exibe a operação
         // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
         //thead, tbody e tfoot
     }
 
-    public void resultOperation(final String characters){
+    public void resultOperation(final String characters, final ArrayList<String> arrayCharacters) {
         final String strCaracters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
-        numberOfLines(strCaracters);
+        numberOfLines(strCaracters, arrayCharacters);
+    }
+
+    private StringBuilder detectLogicalOperator(final ArrayList<String> arrayCharacters, final StringBuilder letrasEncontradas){
+        vAndF.setLength(0);
+        for (String c : arrayCharacters) {
+            if (logicalOperators.contains(c)) {
+                System.out.println("O caractere " + c + " foi encontrado no ArrayList lgc.");
+                simpleProposition(letrasEncontradas);
+                conjunction(true, true);
+                disjunction(true, true);
+                exclusiveDisjunction(true, true);
+                conditional(true, true);
+                biconditional(true, true);
+                return simpleProposition(letrasEncontradas);
+            }
+            else {
+                return simpleProposition(letrasEncontradas);
+            }
+        }
+        return null;
+    }
+
+    private StringBuilder simpleProposition(final StringBuilder characters) {
+        int numberOfPropositions = characters.length();
+        if (numberOfPropositions == 1){
+            vAndF.append("""
+                            <tr>
+                                <td>V</td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                            </tr>
+                    """);
+            return vAndF;
+        }
+
+        else if (numberOfPropositions == 2){
+
+        }
+        else if (numberOfPropositions == 3){}
+        else if (numberOfPropositions == 4){}
+        return null;
+    }
+
+    private boolean negation(final boolean p) {
+        return !p;
+    }
+
+    private boolean conjunction(final boolean p, final boolean q) {
+        return p && q;
+    }
+
+    private boolean disjunction(final boolean p, final boolean q) {
+        return p || q;
+    }
+
+    private boolean exclusiveDisjunction(final boolean p, final boolean q) {
+        return p ^ q;
+    }
+
+    private boolean conditional(final boolean p, final boolean q) {
+        return !p || q;
+    }
+
+    private boolean biconditional(final boolean p, final boolean q) {
+        return p == q;
     }
 }

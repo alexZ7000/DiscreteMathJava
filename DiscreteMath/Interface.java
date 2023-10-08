@@ -34,8 +34,8 @@ public class Interface implements ActionListener {
     private final ArrayList<String> characters = new ArrayList<>();
     private final Operations operations = new Operations(Interface.this);
 
-    private final ArrayList<String> prop = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
-    private final ArrayList<String> lgc = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
+    private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
+    private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
 
     public static void main (String[] args){
         new Interface();
@@ -310,7 +310,7 @@ public class Interface implements ActionListener {
     }
 
     private void CalcularInterface(){
-        operations.resultOperation(String.valueOf(characters));
+        operations.resultOperation(String.valueOf(characters), characters);
     }
 
     public void exibirCalculoDaInterface(String result){
@@ -354,7 +354,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == conjuncaoButton){
             playSound();
-            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("∧");
                 UpdateUI();
                 System.out.println(characters);
@@ -362,7 +362,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == disjuncaoButton){
             playSound();
-            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("∨");
                 UpdateUI();
                 System.out.println(characters);
@@ -370,7 +370,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == calcButton){
             playSound();
-            if (!characters.isEmpty() && !lgc.contains(characters.get(characters.size() - 1)))
+            if (!characters.isEmpty() && !logicalOperators.contains(characters.get(characters.size() - 1)))
                 CalcularInterface();
             else{
                 JOptionPane.showMessageDialog(
@@ -390,7 +390,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == disjuncaoExclusivaButton){
             playSound();
-            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("⊕");
                 UpdateUI();
                 System.out.println(characters);
@@ -398,7 +398,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == condicionalButton){
             playSound();
-            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("→");
                 UpdateUI();
                 System.out.println(characters);
@@ -406,7 +406,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == bicondicionalButton){
             playSound();
-            if (characters.size() == 1 || prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("↔");
                 UpdateUI();
                 System.out.println(characters);
@@ -431,7 +431,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == proposicaoPButton){
             playSound();
-            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("P");
                 UpdateUI();
                 System.out.println(characters);
@@ -439,7 +439,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == proposicaoQButton){
             playSound();
-            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("Q");
                 UpdateUI();
                 System.out.println(characters);
@@ -447,7 +447,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == proposicaoRButton){
             playSound();
-            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("R");
                 UpdateUI();
                 System.out.println(characters);
@@ -455,7 +455,7 @@ public class Interface implements ActionListener {
         }
         else if (e.getSource() == proposicaoSButton){
             playSound();
-            if (characters.isEmpty() || !prop.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
                 characters.add("S");
                 UpdateUI();
                 System.out.println(characters);
