@@ -48,7 +48,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#">
         <img src="https://avatars.githubusercontent.com/u/78627928?v=4" width="100px;" alt="era uma foto daora"/><br>
         <sub>
-          <p><b><i>Alessandro Lima:</i></b> <a href="https://github.com/alexZ7000"><i>alexZ7000</i></a>🥇🏅🎖️</p>
+          <p><b><i>Alessandro Lima:</i></b> <a href="https://github.com/alexZ7000"><i>alexZ7000</i></a>🏅</p>
         </sub>
       </a>
     </td>
