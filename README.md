@@ -1,4 +1,6 @@
-# DiscreteMath Java☕
+# DiscreteMath Java <img src="https://github.com/alexZ7000/DiscreteMathJava/assets/78627928/408f15d2-45e2-4859-911c-5a6dd3110de9" alt="☕" width="32" height="32">
+
+
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/alexZ7000/DiscreteMathJava?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/alexZ7000/DiscreteMathJava?style=for-the-badge)
