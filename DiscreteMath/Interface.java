@@ -2,13 +2,15 @@ package DiscreteMath;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.sound.sampled.*;
 
 
-public class Interface {
+public class Interface implements ActionListener {
     private final JFrame frame = new JFrame();
     private final JButton calcButton = new JButton("Calcular");
     private final JButton exitButton = new JButton("Fechar DiscreteMath");
@@ -42,7 +44,7 @@ public class Interface {
 
     private void playSound(){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./DiscreteMath/pop.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -60,163 +62,24 @@ public class Interface {
     }
 
     private void detectButtonsActions() {
-        exitButton.addActionListener(e -> {
-            playSound();
-            if ((JOptionPane.showConfirmDialog(
-                    frame,
-                    "Deseja realmente fechar o DiscreteMath?",
-                    "DiscreteMath",
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION))
-                System.exit(0);
-            else playSound();
-        });
-
-        conjuncaoButton.addActionListener(e -> {
-            playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("∧");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        disjuncaoButton.addActionListener(e -> {
-            playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("∨");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        calcButton.addActionListener(e -> {
-            playSound();
-            if (!characters.isEmpty() && !logicalOperators.contains(characters.get(characters.size() - 1)))
-                calculateOperations();
-            else{
-                JOptionPane.showMessageDialog(
-                        frame,
-                        "Insira uma expressão VÁLIDA para calcular",
-                        "DiscreteMath",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-                playSound();
-            }
-        });
-
-        negacaoButton.addActionListener(e -> {
-            playSound();
-            characters.add("¬");
-            updateUI();
-            System.out.println(characters);
-        });
-
-        disjuncaoExclusivaButton.addActionListener(e -> {
-            playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("⊕");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        condicionalButton.addActionListener(e -> {
-            playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("→");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        bicondicionalButton.addActionListener(e -> {
-            playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("↔");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        implicacaoButton.addActionListener(e -> {
-            playSound();
-            if (!characters.contains("⇒") && !characters.contains("⇔")) {
-                characters.add("⇒");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        equivalenciaButton.addActionListener(e -> {
-            playSound();
-            if (!characters.contains("⇔") && !characters.contains("⇔")) {
-                characters.add("⇔");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        proposicaoPButton.addActionListener(e -> {
-            playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("P");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        proposicaoQButton.addActionListener(e -> {
-            playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("Q");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        proposicaoRButton.addActionListener(e -> {
-            playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("R");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        proposicaoSButton.addActionListener(e -> {
-            playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
-                characters.add("S");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        leftParenthesisButton.addActionListener(e -> {
-            playSound();
-            characters.add("(");
-            updateUI();
-            rightParenthesisButton.setEnabled(true);
-            System.out.println(characters);
-        });
-
-        rightParenthesisButton.addActionListener(e -> {
-            playSound();
-            if (characters.contains("(")) {
-                characters.add(")");
-                updateUI();
-                System.out.println(characters);
-            }
-        });
-
-        deleteButton.addActionListener(e -> {
-            playSound();
-            if (!characters.isEmpty()) {
-                characters.remove(characters.size() - 1);
-                updateUI();
-                System.out.println(characters);
-            }
-        });
+        // Adicionando escutadores de eventos nos botões
+        exitButton.addActionListener(this);
+        calcButton.addActionListener(this);
+        conjuncaoButton.addActionListener(this);
+        disjuncaoButton.addActionListener(this);
+        negacaoButton.addActionListener(this);
+        disjuncaoExclusivaButton.addActionListener(this);
+        condicionalButton.addActionListener(this);
+        bicondicionalButton.addActionListener(this);
+        implicacaoButton.addActionListener(this);
+        equivalenciaButton.addActionListener(this);
+        proposicaoPButton.addActionListener(this);
+        proposicaoQButton.addActionListener(this);
+        proposicaoRButton.addActionListener(this);
+        proposicaoSButton.addActionListener(this);
+        leftParenthesisButton.addActionListener(this);
+        rightParenthesisButton.addActionListener(this);
+        deleteButton.addActionListener(this);
     }
 
 
@@ -489,5 +352,151 @@ public class Interface {
         String strCaracters = characters.toString().substring(1, characters.toString().length() - 1);
         strCaracters = strCaracters.replaceAll(",", "");
         label.setText(strCaracters);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == exitButton) {
+            playSound();
+            if (JOptionPane.showConfirmDialog(
+                    frame,
+                    "Deseja realmente fechar o DiscreteMath?",
+                    "DiscreteMath",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                System.exit(0);
+            else playSound();
+        }
+        else if (e.getSource() == conjuncaoButton){
+            playSound();
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("∧");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == disjuncaoButton){
+            playSound();
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("∨");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == calcButton){
+            playSound();
+            if (!characters.isEmpty() && !logicalOperators.contains(characters.get(characters.size() - 1)))
+                calculateOperations();
+            else{
+                JOptionPane.showMessageDialog(
+                        frame,
+                        "Insira uma expressão VÁLIDA para calcular",
+                        "DiscreteMath",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+                playSound();
+            }
+        }
+        else if (e.getSource() == negacaoButton){
+            playSound();
+            characters.add("¬");
+            updateUI();
+            System.out.println(characters);
+        }
+        else if (e.getSource() == disjuncaoExclusivaButton){
+            playSound();
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("⊕");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == condicionalButton){
+            playSound();
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("→");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == bicondicionalButton){
+            playSound();
+            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("↔");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == implicacaoButton){
+            playSound();
+            if (!characters.contains("⇒") && !characters.contains("⇔")) {
+                characters.add("⇒");
+                updateUI();
+                System.out.println(characters);
+            }
+
+        }
+        else if (e.getSource() == equivalenciaButton){
+            playSound();
+            if (!characters.contains("⇔") && !characters.contains("⇔")) {
+                characters.add("⇔");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == proposicaoPButton){
+            playSound();
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("P");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == proposicaoQButton){
+            playSound();
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("Q");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == proposicaoRButton){
+            playSound();
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("R");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == proposicaoSButton){
+            playSound();
+            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+                characters.add("S");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == leftParenthesisButton){
+            playSound();
+            characters.add("(");
+            updateUI();
+            rightParenthesisButton.setEnabled(true);
+            System.out.println(characters);
+        }
+        else if (e.getSource() == rightParenthesisButton) {
+            playSound();
+            if (characters.contains("(")) {
+                characters.add(")");
+                updateUI();
+                System.out.println(characters);
+            }
+        }
+        else if (e.getSource() == deleteButton){
+            playSound();
+            if (!characters.isEmpty()) {
+                characters.remove(characters.size() - 1);
+                updateUI();
+                System.out.println(characters);
+            }
+        }
     }
 }
