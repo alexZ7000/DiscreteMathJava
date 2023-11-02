@@ -94,19 +94,11 @@ public class Operations {
         for (String c : arrayCharacters) {
             if (logicalOperators.contains(c)) {
                 System.out.println("O caractere " + c + " foi encontrado no ArrayList lgc.");
-                simpleProposition(letrasEncontradas);
-                conjunction(true, true);
-                disjunction(true, true);
-                exclusiveDisjunction(true, true);
-                conditional(true, true);
-                biconditional(true, true);
-                simpleProposition(letrasEncontradas);
-                return;
+                //TODO: Adicionar a tabela da operação, a tabela das respostas (assim será possivel calcular a negação de P por exemplo)
+                //TODO: Fazer a lógica de contagem binária reversa
             }
-            else {
-                simpleProposition(letrasEncontradas);
-                return;
-            }
+            simpleProposition(letrasEncontradas);
+            return;
         }
     }
 
@@ -122,35 +114,5 @@ public class Operations {
                             </tr>
                     """);
         }
-
-        else if (numberOfPropositions == 2){
-
-        }
-        else if (numberOfPropositions == 3){}
-        else if (numberOfPropositions == 4){}
-    }
-
-    private boolean negation(final boolean p) {
-        return !p;
-    }
-
-    private boolean conjunction(final boolean p, final boolean q) {
-        return p && q;
-    }
-
-    private boolean disjunction(final boolean p, final boolean q) {
-        return p || q;
-    }
-
-    private boolean exclusiveDisjunction(final boolean p, final boolean q) {
-        return p ^ q;
-    }
-
-    private boolean conditional(final boolean p, final boolean q) {
-        return !p || q;
-    }
-
-    private boolean biconditional(final boolean p, final boolean q) {
-        return p == q;
     }
 }
