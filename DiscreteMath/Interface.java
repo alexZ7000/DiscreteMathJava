@@ -32,7 +32,6 @@ public class Interface {
     private final ArrayList<String> characters = new ArrayList<>();
     private final Font font = new Font("serif", Font.PLAIN, 40);
     private final Operations operations = new Operations(Interface.this);
-
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
 
@@ -42,7 +41,7 @@ public class Interface {
 
     private void playSound(){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\aless\\IdeaProjects\\DiscreteMathJava\\DiscreteMath\\pop.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./DiscreteMath/pop.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
