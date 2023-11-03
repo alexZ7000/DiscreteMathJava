@@ -10,41 +10,118 @@ public class Operations {
     private final StringBuilder title = new StringBuilder();
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "(", ")"));
     private final Interface instanceInterface;
+    private final ArrayList<Integer> binariesColumnOne = new ArrayList<>();
+    private final ArrayList<Integer> binariesColumnTwo = new ArrayList<>();
+    private final ArrayList<Integer> binariesColumnThree = new ArrayList<>();
+    private final ArrayList<Integer> binariesColumnFour = new ArrayList<>();
 
     public Operations(Interface instanciaInterface) {
         this.instanceInterface = instanciaInterface;
     }
 
-    private void calculateNumberOfLines(final String characters, final ArrayList<String> arrayCharacters) {
-        int lines = 0;
+    private void calculateNumberOfLines(final String characters) {
         letrasEncontradas.setLength(0);
         for (int i = 0; i < characters.length(); i++) {
             char c = characters.charAt(i);
             if (c == 'P' || c == 'Q' || c == 'R' || c == 'S') {
                 if (!(letrasEncontradas.toString()).contains(String.valueOf(c))) {
                     letrasEncontradas.append(c);
-                    lines++;
                 }
             }
         }
-
-        if (lines == 1){
-            lines = 2;
+        if (letrasEncontradas.length() == 1){
+            clearAllBinariesColumns();
+            getBinariesColumnOne(2);
         }
-        else if (lines == 2) {
-            lines = 4;
+        else if (letrasEncontradas.length() == 2){
+            //00
+            clearAllBinariesColumns();
+            getBinariesColumnOne(4);
+            getBinariesColumnTwo(4);
         }
-        else if (lines == 3) {
-            lines = 8;
+        else if (letrasEncontradas.length() == 3) {
+            //000
+            clearAllBinariesColumns();
+            getBinariesColumnOne(8);
+            getBinariesColumnTwo(8);
+            getBinariesColumnThree(8);
         }
-        else if (lines == 4) {
-            lines = 16;
+        else if (letrasEncontradas.length() == 4) {
+            //0000
+            clearAllBinariesColumns();
+            getBinariesColumnOne(16);
+            getBinariesColumnTwo(16);
+            getBinariesColumnThree(16);
+            getBinariesColumnFour();
         }
-        detectLogicalOperator(arrayCharacters, letrasEncontradas);
-        TitleConstructor(letrasEncontradas, lines, vAndF);
+        convertBinariesToTrueOrFalse(binariesColumnOne, binariesColumnTwo, binariesColumnThree, binariesColumnFour);
+        System.out.println(vAndF);
+        TitleConstructor(letrasEncontradas, vAndF);
     }
 
-    private void TitleConstructor(final StringBuilder letras, final int lines, final StringBuilder vAndF){
+    private void convertBinariesToTrueOrFalse(ArrayList<Integer> binariesColumnOne, ArrayList<Integer> binariesColumnTwo, ArrayList<Integer> binariesColumnThree, ArrayList<Integer> binariesColumnFour) {
+        vAndF.setLength(0);
+        for (int i = 0; i < binariesColumnOne.size(); i++) {
+            if (binariesColumnOne.get(i) == 1) vAndF.append("<tr><td>V</td>");
+            else vAndF.append("<tr><td>F</td>");
+            if (!binariesColumnTwo.isEmpty()) {
+                if (binariesColumnTwo.get(i) == 1) vAndF.append("<td>V</td>");
+                else vAndF.append("<td>F</td>");
+            }
+            if (!binariesColumnThree.isEmpty()) {
+                if (binariesColumnThree.get(i) == 1) vAndF.append("<td>V</td>");
+                else vAndF.append("<td>F</td>");
+            }
+            if (!binariesColumnFour.isEmpty()) {
+                if (binariesColumnFour.get(i) == 1) vAndF.append("<td>V</td>");
+                else vAndF.append("<td>F</td>");
+            }
+            vAndF.append("</tr>");
+        }
+    }
+
+    private void getBinariesColumnOne(int quantityOfBinaries) {
+        for (int i = 0; i < quantityOfBinaries; ++i) {
+            if (i >= quantityOfBinaries / 2) binariesColumnOne.add(0);
+            else binariesColumnOne.add(1);
+        }
+        System.out.println("1:" + binariesColumnOne);
+    }
+
+    private void getBinariesColumnTwo(int quantityOfBinaries) {
+        for (int i = 0; i < quantityOfBinaries; i++) {
+            if (i >= quantityOfBinaries / 2) binariesColumnTwo.add(1);
+            else binariesColumnTwo.add(0);
+        }
+        System.out.println("2:" + binariesColumnTwo);
+    }
+
+    private void getBinariesColumnThree(int quantityOfBinaries) {
+        for (int i = 0; i < quantityOfBinaries / 4; i++) {
+            binariesColumnThree.add(1);
+            binariesColumnThree.add(1);
+            binariesColumnThree.add(0);
+            binariesColumnThree.add(0);
+        }
+        System.out.println("3:" + binariesColumnThree);
+    }
+
+    private void getBinariesColumnFour() {
+        for (int i = 1; i <= 8; i++) {
+            binariesColumnFour.add(1);
+            binariesColumnFour.add(0);
+        }
+        System.out.println("4:" + binariesColumnFour);
+    }
+
+    private void clearAllBinariesColumns() {
+        binariesColumnOne.clear();
+        binariesColumnTwo.clear();
+        binariesColumnThree.clear();
+        binariesColumnFour.clear();
+    }
+
+    private void TitleConstructor(final StringBuilder letras, final StringBuilder vAndF){
         title.setLength(0);
         title.append("<tr>");
         for (int j = 0; j < letras.length(); j++) {
@@ -84,35 +161,8 @@ public class Operations {
         //thead, tbody e tfoot
     }
 
-    public void resultOperation(final String characters, final ArrayList<String> arrayCharacters) {
+    public void resultOperation(final String characters) {
         final String strCaracters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
-        calculateNumberOfLines(strCaracters, arrayCharacters);
-    }
-
-    private void detectLogicalOperator(final ArrayList<String> arrayCharacters, final StringBuilder letrasEncontradas){
-        vAndF.setLength(0);
-        for (String c : arrayCharacters) {
-            if (logicalOperators.contains(c)) {
-                System.out.println("O caractere " + c + " foi encontrado no ArrayList lgc.");
-                //TODO: Adicionar a tabela da operação, a tabela das respostas (assim será possivel calcular a negação de P por exemplo)
-                //TODO: Fazer a lógica de contagem binária reversa
-            }
-            simpleProposition(letrasEncontradas);
-            return;
-        }
-    }
-
-    private void simpleProposition(final StringBuilder characters) {
-        int numberOfPropositions = characters.length();
-        if (numberOfPropositions == 1){
-            vAndF.append("""
-                            <tr>
-                                <td>V</td>
-                            </tr>
-                            <tr>
-                                <td>F</td>
-                            </tr>
-                    """);
-        }
+        calculateNumberOfLines(strCaracters);
     }
 }

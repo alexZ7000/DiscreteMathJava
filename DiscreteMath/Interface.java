@@ -323,7 +323,7 @@ public class Interface implements ActionListener {
     }
 
     private void calculateOperations(){
-        operations.resultOperation(String.valueOf(characters), characters);
+        operations.resultOperation(String.valueOf(characters));
     }
 
     public void showCalculationInInterface(String result){
