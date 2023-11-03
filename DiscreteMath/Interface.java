@@ -218,7 +218,6 @@ public class Interface {
         });
     }
 
-
     private void defineDefaultFrameProperties(){
         // definindo propriedades do meu frame
         int x = 1900, y = 1000;

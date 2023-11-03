@@ -10,6 +10,10 @@ public class Operations {
     private final StringBuilder title = new StringBuilder();
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "(", ")"));
     private final Interface instanceInterface;
+    private final ArrayList<Integer> binariesColumnOne = new ArrayList<>();
+    private final ArrayList<Integer> binariesColumnTwo = new ArrayList<>();
+    private final ArrayList<Integer> binariesColumnThree = new ArrayList<>();
+    private final ArrayList<Integer> binariesColumnFour = new ArrayList<>();
 
     public Operations(Interface instanciaInterface) {
         this.instanceInterface = instanciaInterface;
@@ -27,22 +31,68 @@ public class Operations {
                 }
             }
         }
-
-        if (lines == 1){
+        System.out.println(letrasEncontradas.length());
+        if (letrasEncontradas.length() == 1){
+            lines=1;
+            getBinariesColumnOne(1);
+        }
+        if (letrasEncontradas.length() == 2){
+            //00
             lines = 2;
+            getBinariesColumnOne(4);
+            getBinariesColumnTwo(4);
         }
-        else if (lines == 2) {
+        else if (letrasEncontradas.length() == 3) {
+            //000
             lines = 4;
+            getBinariesColumnOne(8);
+            getBinariesColumnTwo(8);
         }
-        else if (lines == 3) {
+        else if (letrasEncontradas.length() == 4) {
+            //0000
             lines = 8;
-        }
-        else if (lines == 4) {
-            lines = 16;
+            getBinariesColumnOne(16);
+            getBinariesColumnTwo(16);
         }
         detectLogicalOperator(arrayCharacters, letrasEncontradas);
         TitleConstructor(letrasEncontradas, lines, vAndF);
     }
+
+    private void getBinariesColumnOne(int quantityOfBinaries) {
+        binariesColumnOne.clear();
+        for (int i = 0; i < quantityOfBinaries; i++) {
+            if (i >= quantityOfBinaries/2) binariesColumnOne.add(0);
+            else binariesColumnOne.add(1);
+        }
+        System.out.println(binariesColumnOne);
+    }
+
+    private void getBinariesColumnTwo(int quantityOfBinaries) {
+        binariesColumnTwo.clear();
+        for (int i = 1; i < quantityOfBinaries; i++) {
+            if (i >= quantityOfBinaries/2) binariesColumnTwo.add(0);
+            else binariesColumnTwo.add(1);
+        } //TODO: Arrumar a função getBinariesColumnTwo
+        System.out.println(binariesColumnTwo);
+    }
+
+    private void getBinariesColumnThree(int quantityOfBinaries) {
+        binariesColumnThree.clear();
+        for (int i = 1; i < quantityOfBinaries; i++) {
+            if (i >= quantityOfBinaries / 2) binariesColumnThree.add(0);
+            else binariesColumnThree.add(1);
+        }
+        System.out.println(binariesColumnThree);
+    }
+    private void getBinariesColumnFour(int quantityOfBinaries) {
+        binariesColumnFour.clear();
+        for (int i = 1; i < quantityOfBinaries; i++) {
+            if (i >= quantityOfBinaries / 2) binariesColumnFour.add(0);
+            else binariesColumnFour.add(1);
+        }
+        System.out.println(binariesColumnFour);
+    }
+
 
     private void TitleConstructor(final StringBuilder letras, final int lines, final StringBuilder vAndF){
         title.setLength(0);
