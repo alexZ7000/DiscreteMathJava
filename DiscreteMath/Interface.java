@@ -34,6 +34,8 @@ public class Interface {
     private final Operations operations = new Operations(Interface.this);
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
+    private int contadorAbreParenteses = 0;
+    private int contadorFechaParenteses = 0;
 
     public static void main (String[] args){
         new Interface();
@@ -458,7 +460,7 @@ public class Interface {
     }
 
     private void calculateOperations(){
-        operations.resultOperation(String.valueOf(characters), characters);
+        operations.resultOperation(String.valueOf(characters));
     }
 
     public void showCalculationInInterface(String result){
