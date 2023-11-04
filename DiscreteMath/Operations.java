@@ -9,18 +9,19 @@ public class Operations {
     private final StringBuilder vAndF = new StringBuilder();
     private final StringBuilder title = new StringBuilder();
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "(", ")"));
-    private final Interface instanceInterface;
+    private final MainScreen instanceMainScreen;
     private final ArrayList<Integer> binariesColumnOne = new ArrayList<>();
     private final ArrayList<Integer> binariesColumnTwo = new ArrayList<>();
     private final ArrayList<Integer> binariesColumnThree = new ArrayList<>();
     private final ArrayList<Integer> binariesColumnFour = new ArrayList<>();
 
-    public Operations(Interface instanciaInterface) {
-        this.instanceInterface = instanciaInterface;
+    public Operations(MainScreen instanciaMainScreen) {
+        this.instanceMainScreen = instanciaMainScreen;
     }
 
-    private void calculateNumberOfLines(final String characters) {
+    private void calculateNumberOfPrepositions(final String characters, final String entireOperationCharacters) {
         letrasEncontradas.setLength(0);
+        boolean isSinglePropositon = false;
         for (int i = 0; i < characters.length(); i++) {
             char c = characters.charAt(i);
             if (c == 'P' || c == 'Q' || c == 'R' || c == 'S') {
@@ -32,6 +33,7 @@ public class Operations {
         if (letrasEncontradas.length() == 1){
             clearAllBinariesColumns();
             getBinariesColumnOne(2);
+            isSinglePropositon = true;
         }
         else if (letrasEncontradas.length() == 2){
             //00
@@ -56,10 +58,10 @@ public class Operations {
         }
         convertBinariesToTrueOrFalse(binariesColumnOne, binariesColumnTwo, binariesColumnThree, binariesColumnFour);
         System.out.println(vAndF);
-        TitleConstructor(letrasEncontradas, vAndF);
+        TitleConstructor(letrasEncontradas, vAndF, entireOperationCharacters, isSinglePropositon);
     }
 
-    private void convertBinariesToTrueOrFalse(ArrayList<Integer> binariesColumnOne, ArrayList<Integer> binariesColumnTwo, ArrayList<Integer> binariesColumnThree, ArrayList<Integer> binariesColumnFour) {
+    private void convertBinariesToTrueOrFalse(final ArrayList<Integer> binariesColumnOne, final ArrayList<Integer> binariesColumnTwo, final ArrayList<Integer> binariesColumnThree, final ArrayList<Integer> binariesColumnFour) {
         vAndF.setLength(0);
         for (int i = 0; i < binariesColumnOne.size(); i++) {
             if (binariesColumnOne.get(i) == 1) vAndF.append("<tr><td>V</td>");
@@ -80,7 +82,7 @@ public class Operations {
         }
     }
 
-    private void getBinariesColumnOne(int quantityOfBinaries) {
+    private void getBinariesColumnOne(final int quantityOfBinaries) {
         for (int i = 0; i < quantityOfBinaries; ++i) {
             if (i >= quantityOfBinaries / 2) binariesColumnOne.add(0);
             else binariesColumnOne.add(1);
@@ -88,7 +90,7 @@ public class Operations {
         System.out.println("1:" + binariesColumnOne);
     }
 
-    private void getBinariesColumnTwo(int quantityOfBinaries) {
+    private void getBinariesColumnTwo(final int quantityOfBinaries) {
         for (int i = 0; i < quantityOfBinaries; i++) {
             if (i >= quantityOfBinaries / 2) binariesColumnTwo.add(1);
             else binariesColumnTwo.add(0);
@@ -96,7 +98,7 @@ public class Operations {
         System.out.println("2:" + binariesColumnTwo);
     }
 
-    private void getBinariesColumnThree(int quantityOfBinaries) {
+    private void getBinariesColumnThree(final int quantityOfBinaries) {
         for (int i = 0; i < quantityOfBinaries / 4; i++) {
             binariesColumnThree.add(1);
             binariesColumnThree.add(1);
@@ -121,13 +123,14 @@ public class Operations {
         binariesColumnFour.clear();
     }
 
-    private void TitleConstructor(final StringBuilder letras, final StringBuilder vAndF){
+    private void TitleConstructor(final StringBuilder letras, final StringBuilder vAndF, final String entireOperationCharacters, final boolean isSingleProposition){
         title.setLength(0);
         title.append("<tr>");
         for (int j = 0; j < letras.length(); j++) {
             char l = letras.charAt(j);
             title.append("<th>").append(l).append("</th>");
         }
+        if (!(isSingleProposition)) title.append("<th>").append(entireOperationCharacters).append("</th>");
         title.append("</tr>");
         title.append(vAndF);
         // TODO: Melhorar a lógica de adicionar V e F na tabela
@@ -155,14 +158,15 @@ public class Operations {
                       <table>
                  """ + title +// td table data (colunas), tr table row (linhas), th table head (cabeçalho da tabela)
                 "</table></body></html> ";
-        instanceInterface.showCalculationInInterface(htmlTable);
+        instanceMainScreen.showCalculationInInterface(htmlTable);
         //TODO: Arrumar a tabela que só exibe suas letras e não exibe a operação
         // O alinhamento da tabela é sempre a esquerda, o alinhamento do titulo é sempre ao centro
         //thead, tbody e tfoot
     }
 
     public void resultOperation(final String characters) {
-        final String strCaracters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
-        calculateNumberOfLines(strCaracters);
+        final String strCharacters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
+        final String entireOperationCharacters = (characters.substring(1, characters.length() - 1).replaceAll(",", " "));
+        calculateNumberOfPrepositions(strCharacters, entireOperationCharacters);
     }
 }

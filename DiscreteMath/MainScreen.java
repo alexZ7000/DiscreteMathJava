@@ -8,7 +8,7 @@ import java.util.Arrays;
 import javax.sound.sampled.*;
 
 
-public class Interface {
+public class MainScreen {
     private final JFrame frame = new JFrame();
     private final JButton calcButton = new JButton("Calcular");
     private final JButton exitButton = new JButton("Fechar DiscreteMath");
@@ -31,14 +31,12 @@ public class Interface {
     private final JLabel resultLabel = new JLabel();
     private final ArrayList<String> characters = new ArrayList<>();
     private final Font font = new Font("serif", Font.PLAIN, 40);
-    private final Operations operations = new Operations(Interface.this);
+    private final Operations operations = new Operations(MainScreen.this);
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
-    private int contadorAbreParenteses = 0;
-    private int contadorFechaParenteses = 0;
 
     public static void main (String[] args){
-        new Interface();
+        new MainScreen();
     }
 
     private void playSound(){
@@ -53,7 +51,7 @@ public class Interface {
         }
     }
 
-    public Interface() {
+    public MainScreen() {
         playSound();
         defineDefaultFrameProperties();
         defineButtonsProperties();
@@ -351,90 +349,90 @@ public class Interface {
 
         // localização dos meus botões
         calcButton.setBounds(
-                x/2-100, 600, 220,
+                x/2-300, 600, 220,
                 50
         );
 
 
         exitButton.setBounds(
-                x/2-100, 700, 220,
+                x/2-300, 700, 220,
                 50
         );
 
 
 
         conjuncaoButton.setBounds(
-                x/2-400, 400, 100,
+                x/2-600, 400, 100,
                 50
         );
 
         disjuncaoButton.setBounds(
-                x/2-300, 400, 100,
+                x/2-500, 400, 100,
                 50
         );
 
         negacaoButton.setBounds(
-                x/2-200, 400, 100,
+                x/2-400, 400, 100,
                 50
         );
 
         disjuncaoExclusivaButton.setBounds(
-                x/2-100, 400, 100,
+                x/2-300, 400, 100,
                 50
         );
 
         condicionalButton.setBounds(
-                x/2, 400, 100,
+                x/2-200, 400, 100,
                 50
         );
 
         bicondicionalButton.setBounds(
-                x/2+100, 400, 100,
+                x/2-100, 400, 100,
                 50
         );
 
         implicacaoButton.setBounds(
-                x/2+200, 400, 100,
+                x/2, 400, 100,
                 50
         );
 
         deleteButton.setBounds(
-                x/2+300, 400, 100,
+                x/2+100, 400, 100,
                 50
         );
 
         proposicaoPButton.setBounds(
-                x/2-400, 450, 100,
+                x/2-600, 450, 100,
                 50
         );
 
         proposicaoQButton.setBounds(
-                x/2-300, 450, 100,
+                x/2-500, 450, 100,
                 50
         );
 
         proposicaoRButton.setBounds(
-                x/2-200, 450, 100,
+                x/2-400, 450, 100,
                 50
         );
 
         proposicaoSButton.setBounds(
-                x/2-100, 450, 100,
+                x/2-300, 450, 100,
                 50
         );
 
         leftParenthesisButton.setBounds(
-                x/2, 450, 100,
+                x/2-200, 450, 100,
                 50
         );
 
         rightParenthesisButton.setBounds(
-                x/2+100, 450, 100,
+                x/2-100, 450, 100,
                 50
         );
 
         equivalenciaButton.setBounds(
-                x/2+200, 450, 100,
+                x/2, 450, 100,
                 50
         );
 
@@ -472,8 +470,8 @@ public class Interface {
         );
         resultLabel.setFont(new Font("serif", Font.PLAIN, 20));
         resultLabel.setBounds(
-                1900/2+300, 450, 1200,
-                550
+                1900/2+205, -5, 1600,
+                1000
         );
         frame.add(resultLabel);
         resultLabel.setText(result);
@@ -482,7 +480,7 @@ public class Interface {
     private void updateUI(){
         label.setFont(font);
         label.setBounds(
-                1900/2-200, 290, 800,
+                1900/2-500, 290, 800,
                 100
         );
         frame.add(label);
