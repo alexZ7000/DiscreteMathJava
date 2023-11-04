@@ -34,7 +34,6 @@ public class Interface implements ActionListener {
     private final ArrayList<String> characters = new ArrayList<>();
     private final Font font = new Font("serif", Font.PLAIN, 40);
     private final Operations operations = new Operations(Interface.this);
-
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
 
@@ -50,7 +49,6 @@ public class Interface implements ActionListener {
             clip.start();
         } catch (Exception ex) {
             throw new IllegalCallerException("Este arquivo não existe: ", ex);
-
         }
     }
 
@@ -82,11 +80,10 @@ public class Interface implements ActionListener {
         deleteButton.addActionListener(this);
     }
 
-
     private void defineDefaultFrameProperties(){
         // definindo propriedades do meu frame
-        int x = 1900, y = 1000;
-        frame.setSize(x, y);
+        final int x = 1900, y = 1000;
+        frame.setSize(x-400, y-200);
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setTitle("DiscreteMath");
@@ -97,7 +94,7 @@ public class Interface implements ActionListener {
         JLabel label1 = new JLabel("DiscreteMath");
         label1.setFont(new Font("serif", Font.PLAIN, 80));
         label1.setBounds(
-                x/2-200, 80, 800,
+                x/2-400, 40, 800,
                 100
         );
 
@@ -105,7 +102,7 @@ public class Interface implements ActionListener {
     }
 
     private void defineButtonsProperties() {
-        int x = 1900;
+        final int x = 1900;
 
         conjuncaoButton.setFont(new Font("serif", Font.PLAIN, 40));
 
@@ -214,90 +211,90 @@ public class Interface implements ActionListener {
 
         // localização dos meus botões
         calcButton.setBounds(
-                x/2-100, 600, 220,
+                x/2-300, 600, 220,
                 50
         );
 
 
         exitButton.setBounds(
-                x/2-100, 700, 220,
+                x/2-300, 700, 220,
                 50
         );
 
 
 
         conjuncaoButton.setBounds(
-                x/2-400, 400, 100,
+                x/2-600, 400, 100,
                 50
         );
 
         disjuncaoButton.setBounds(
-                x/2-300, 400, 100,
+                x/2-500, 400, 100,
                 50
         );
 
         negacaoButton.setBounds(
-                x/2-200, 400, 100,
+                x/2-400, 400, 100,
                 50
         );
 
         disjuncaoExclusivaButton.setBounds(
-                x/2-100, 400, 100,
+                x/2-300, 400, 100,
                 50
         );
 
         condicionalButton.setBounds(
-                x/2, 400, 100,
+                x/2-200, 400, 100,
                 50
         );
 
         bicondicionalButton.setBounds(
-                x/2+100, 400, 100,
+                x/2-100, 400, 100,
                 50
         );
 
         implicacaoButton.setBounds(
-                x/2+200, 400, 100,
+                x/2, 400, 100,
                 50
         );
 
         deleteButton.setBounds(
-                x/2+300, 400, 100,
+                x/2+100, 400, 100,
                 50
         );
 
         proposicaoPButton.setBounds(
-                x/2-400, 450, 100,
+                x/2-600, 450, 100,
                 50
         );
 
         proposicaoQButton.setBounds(
-                x/2-300, 450, 100,
+                x/2-500, 450, 100,
                 50
         );
 
         proposicaoRButton.setBounds(
-                x/2-200, 450, 100,
+                x/2-400, 450, 100,
                 50
         );
 
         proposicaoSButton.setBounds(
-                x/2-100, 450, 100,
+                x/2-300, 450, 100,
                 50
         );
 
         leftParenthesisButton.setBounds(
-                x/2, 450, 100,
+                x/2-200, 450, 100,
                 50
         );
 
         rightParenthesisButton.setBounds(
-                x/2+100, 450, 100,
+                x/2-100, 450, 100,
                 50
         );
 
         equivalenciaButton.setBounds(
-                x/2+200, 450, 100,
+                x/2, 450, 100,
                 50
         );
 
@@ -335,8 +332,8 @@ public class Interface implements ActionListener {
         );
         resultLabel.setFont(new Font("serif", Font.PLAIN, 20));
         resultLabel.setBounds(
-                1900/2+300, 450, 1200,
-                550
+                1900/2+205, -5, 1600,
+                1000
         );
         frame.add(resultLabel);
         resultLabel.setText(result);
@@ -345,7 +342,7 @@ public class Interface implements ActionListener {
     private void updateUI(){
         label.setFont(font);
         label.setBounds(
-                1900/2-200, 290, 800,
+                1900/2-500, 290, 800,
                 100
         );
         frame.add(label);
