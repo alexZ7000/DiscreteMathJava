@@ -10,7 +10,7 @@ import java.util.Arrays;
 import javax.sound.sampled.*;
 
 
-public class Interface implements ActionListener {
+public class MainScreen implements ActionListener {
     private final JFrame frame = new JFrame();
     private final JButton calcButton = new JButton("Calcular");
     private final JButton exitButton = new JButton("Fechar DiscreteMath");
@@ -33,12 +33,12 @@ public class Interface implements ActionListener {
     private final JLabel resultLabel = new JLabel();
     private final ArrayList<String> characters = new ArrayList<>();
     private final Font font = new Font("serif", Font.PLAIN, 40);
-    private final Operations operations = new Operations(Interface.this);
+    private final Operations operations = new Operations(MainScreen.this);
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
 
     public static void main (String[] args){
-        new Interface();
+        new MainScreen();
     }
 
     private void playSound(){
@@ -52,7 +52,7 @@ public class Interface implements ActionListener {
         }
     }
 
-    public Interface() {
+    public MainScreen() {
         playSound();
         defineDefaultFrameProperties();
         defineButtonsProperties();
@@ -89,6 +89,7 @@ public class Interface implements ActionListener {
         frame.setTitle("DiscreteMath");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBackground(new Color(0,0,0));
+        frame.setLocationRelativeTo(null);
 
 
         JLabel label1 = new JLabel("DiscreteMath");
