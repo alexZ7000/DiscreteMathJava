@@ -5,7 +5,6 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 import javax.sound.sampled.*;
 
 
@@ -30,9 +29,9 @@ public class MainScreen {
     private final JButton deleteButton = new JButton("Apagar");
     private final JLabel label = new JLabel();
     private final JLabel resultLabel = new JLabel();
-    private final ArrayList<String> characters = new ArrayList<>();
     private final Font font = new Font("serif", Font.PLAIN, 40);
     private final Operations operations = new Operations(MainScreen.this);
+    private final ArrayList<String> characters = new ArrayList<>();
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
     private int leftParenthesisCounter = 0, rightParenthesisCounter = 0;
