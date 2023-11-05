@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import javax.sound.sampled.*;
 
 
@@ -34,6 +35,7 @@ public class MainScreen {
     private final Operations operations = new Operations(MainScreen.this);
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
+    private int leftParenthesisCounter = 0, rightParenthesisCounter = 0;
 
     public static void main (String[] args){
         new MainScreen();
@@ -193,18 +195,18 @@ public class MainScreen {
 
         leftParenthesisButton.addActionListener(e -> {
             playSound();
+            leftParenthesisCounter++;
             characters.add("(");
             updateUI();
-            rightParenthesisButton.setEnabled(true);
             System.out.println(characters);
         });
 
         rightParenthesisButton.addActionListener(e -> {
             playSound();
-            if (characters.contains("(")) {
+            if (leftParenthesisCounter > rightParenthesisCounter){
+                rightParenthesisCounter++;
                 characters.add(")");
                 updateUI();
-                System.out.println(characters);
             }
         });
 
@@ -458,7 +460,16 @@ public class MainScreen {
     }
 
     private void calculateOperations(){
-        operations.resultOperation(String.valueOf(characters));
+        if (characters.contains("P") || characters.contains("Q") || characters.contains("R") || characters.contains("S"))
+            operations.resultOperation(String.valueOf(characters));
+        else
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Sua expressão deve conter ao menos uma proposição",
+                    "DiscreteMath",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        playSound();
     }
 
     public void showCalculationInInterface(String result){
