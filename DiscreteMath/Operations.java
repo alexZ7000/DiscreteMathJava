@@ -58,6 +58,7 @@ public class Operations {
         }
         convertBinariesToTrueOrFalse(binariesColumnOne, binariesColumnTwo, binariesColumnThree, binariesColumnFour);
         System.out.println(vAndF);
+        detectLogicalOperators(entireOperationCharacters);
         TitleConstructor(letrasEncontradas, vAndF, entireOperationCharacters, isSinglePropositon);
     }
 
@@ -121,6 +122,68 @@ public class Operations {
         binariesColumnTwo.clear();
         binariesColumnThree.clear();
         binariesColumnFour.clear();
+    }
+
+    private void detectLogicalOperators(final String entireOperationCharacters) {
+        for (int i = 0; i < entireOperationCharacters.length(); i++) {
+            char c = entireOperationCharacters.charAt(i);
+            if (logicalOperators.contains(String.valueOf(c))) {
+                if (c == '∧') conjunction(entireOperationCharacters);
+                else if (c == '∨') disjunction(entireOperationCharacters);
+                else if (c == '⊕') exclusiveDisjunction(entireOperationCharacters);
+                else if (c == '→') conditional(entireOperationCharacters);
+                else if (c == '↔') biconditional(entireOperationCharacters);
+                else if (c == '⇒') materialConditional(entireOperationCharacters);
+                else if (c == '⇔') materialBiconditional(entireOperationCharacters);
+                else if (c == '≡') equivalence(entireOperationCharacters);
+                else if (c == '(') openParenthesis(entireOperationCharacters);
+                else if (c == ')') closeParenthesis(entireOperationCharacters);
+            }
+        }
+    }
+
+    private void conjunction(final String entireOperationCharacters) {
+        System.out.println("Conjunção");
+    }
+
+    private void disjunction(final String entireOperationCharacters) {
+        System.out.println("Disjunção");
+    }
+
+    private void exclusiveDisjunction(final String entireOperationCharacters) {
+        System.out.println("Disjunção Exclusiva");
+    }
+
+    private void conditional(final String entireOperationCharacters) {
+        System.out.println("Condicional");
+    }
+
+    private void biconditional(final String entireOperationCharacters) {
+        System.out.println("Bicondicional");
+    }
+
+    private void materialConditional(final String entireOperationCharacters) {
+        System.out.println("Condicional Material");
+    }
+
+    private void materialBiconditional(final String entireOperationCharacters) {
+        System.out.println("Bicondicional Material");
+    }
+
+    private void equivalence(final String entireOperationCharacters) {
+        System.out.println("Equivalência");
+    }
+
+    private void openParenthesis(final String entireOperationCharacters) {
+        System.out.println("Parênteses Aberto");
+    }
+
+    private void closeParenthesis(final String entireOperationCharacters) {
+        System.out.println("Parênteses Fechado");
+    }
+
+    private void negation(final String entireOperationCharacters) {
+        System.out.println("Negação");
     }
 
     private void TitleConstructor(final StringBuilder letras, final StringBuilder vAndF, final String entireOperationCharacters, final boolean isSingleProposition){
