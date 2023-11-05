@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Operations {
     private final StringBuilder letrasEncontradas = new StringBuilder();
+    private final StringBuilder negacoesEncontradas = new StringBuilder();
     private final StringBuilder vAndF = new StringBuilder();
     private final StringBuilder title = new StringBuilder();
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "(", ")"));
@@ -22,6 +23,7 @@ public class Operations {
     private void calculateNumberOfPrepositions(final String characters, final String entireOperationCharacters) {
         letrasEncontradas.setLength(0);
         boolean isSinglePropositon = false;
+        boolean isNegation = false;
         for (int i = 0; i < characters.length(); i++) {
             char c = characters.charAt(i);
             if (c == 'P' || c == 'Q' || c == 'R' || c == 'S') {
@@ -31,27 +33,28 @@ public class Operations {
             }
         }
         if (letrasEncontradas.length() == 1){
+            if (characters.contains("¬")) isNegation = true;
             clearAllBinariesColumns();
-            getBinariesColumnOne(2);
+            getBinariesColumnOne(2, isNegation);
             isSinglePropositon = true;
         }
         else if (letrasEncontradas.length() == 2){
             //00
             clearAllBinariesColumns();
-            getBinariesColumnOne(4);
+            getBinariesColumnOne(4, false);
             getBinariesColumnTwo(4);
         }
         else if (letrasEncontradas.length() == 3) {
             //000
             clearAllBinariesColumns();
-            getBinariesColumnOne(8);
+            getBinariesColumnOne(8, false);
             getBinariesColumnTwo(8);
             getBinariesColumnThree(8);
         }
         else if (letrasEncontradas.length() == 4) {
             //0000
             clearAllBinariesColumns();
-            getBinariesColumnOne(16);
+            getBinariesColumnOne(16, false);
             getBinariesColumnTwo(16);
             getBinariesColumnThree(16);
             getBinariesColumnFour();
@@ -83,10 +86,18 @@ public class Operations {
         }
     }
 
-    private void getBinariesColumnOne(final int quantityOfBinaries) {
-        for (int i = 0; i < quantityOfBinaries; ++i) {
-            if (i >= quantityOfBinaries / 2) binariesColumnOne.add(0);
-            else binariesColumnOne.add(1);
+    private void getBinariesColumnOne(final int quantityOfBinaries, boolean isNegation) {
+        if (isNegation){
+            for (int i = 0; i < quantityOfBinaries; ++i) {
+                if (i >= quantityOfBinaries / 2) binariesColumnOne.add(1);
+                else binariesColumnOne.add(0);
+            }
+        }
+        else {
+            for (int i = 0; i < quantityOfBinaries; ++i) {
+                if (i >= quantityOfBinaries / 2) binariesColumnOne.add(0);
+                else binariesColumnOne.add(1);
+            }
         }
         System.out.println("1:" + binariesColumnOne);
     }
@@ -128,7 +139,8 @@ public class Operations {
         for (int i = 0; i < entireOperationCharacters.length(); i++) {
             char c = entireOperationCharacters.charAt(i);
             if (logicalOperators.contains(String.valueOf(c))) {
-                if (c == '∧') conjunction(entireOperationCharacters);
+                if (c == '(') parenthesisMethod(entireOperationCharacters);
+                else if (c == '∧') conjunction(entireOperationCharacters);
                 else if (c == '∨') disjunction(entireOperationCharacters);
                 else if (c == '⊕') exclusiveDisjunction(entireOperationCharacters);
                 else if (c == '→') conditional(entireOperationCharacters);
@@ -136,8 +148,6 @@ public class Operations {
                 else if (c == '⇒') materialConditional(entireOperationCharacters);
                 else if (c == '⇔') materialBiconditional(entireOperationCharacters);
                 else if (c == '≡') equivalence(entireOperationCharacters);
-                else if (c == '(') openParenthesis(entireOperationCharacters);
-                else if (c == ')') closeParenthesis(entireOperationCharacters);
             }
         }
     }
@@ -174,12 +184,8 @@ public class Operations {
         System.out.println("Equivalência");
     }
 
-    private void openParenthesis(final String entireOperationCharacters) {
+    private void parenthesisMethod(final String entireOperationCharacters) {
         System.out.println("Parênteses Aberto");
-    }
-
-    private void closeParenthesis(final String entireOperationCharacters) {
-        System.out.println("Parênteses Fechado");
     }
 
     private void negation(final String entireOperationCharacters) {
