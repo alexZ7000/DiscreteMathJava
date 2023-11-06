@@ -31,11 +31,12 @@ public class MainScreen implements ActionListener {
     private final JButton deleteButton = new JButton("Apagar");
     private final JLabel label = new JLabel();
     private final JLabel resultLabel = new JLabel();
-    private final ArrayList<String> characters = new ArrayList<>();
     private final Font font = new Font("serif", Font.PLAIN, 40);
     private final Operations operations = new Operations(MainScreen.this);
+    private final ArrayList<String> characters = new ArrayList<>();
     private final ArrayList<String> propositions = new ArrayList<>(Arrays.asList("P", "Q", "R", "S"));
     private final ArrayList<String> logicalOperators = new ArrayList<>(Arrays.asList("∧", "∨", "¬", "⊕", "→", "↔", "⇒", "⇔", "≡", "("));
+    private int leftParenthesisCounter = 0, rightParenthesisCounter = 0;
 
     public static void main (String[] args){
         new MainScreen();
@@ -321,7 +322,16 @@ public class MainScreen implements ActionListener {
     }
 
     private void calculateOperations(){
-        operations.resultOperation(String.valueOf(characters));
+        if (characters.contains("P") || characters.contains("Q") || characters.contains("R") || characters.contains("S"))
+            operations.resultOperation(String.valueOf(characters));
+        else
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Sua expressão deve conter ao menos uma proposição",
+                    "DiscreteMath",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        playSound();
     }
 
     public void showCalculationInInterface(String result){
@@ -477,15 +487,15 @@ public class MainScreen implements ActionListener {
             playSound();
             characters.add("(");
             updateUI();
-            rightParenthesisButton.setEnabled(true);
+            leftParenthesisCounter++;
             System.out.println(characters);
         }
         else if (e.getSource() == rightParenthesisButton) {
             playSound();
-            if (characters.contains("(")) {
+            if (leftParenthesisCounter > rightParenthesisCounter){
+                rightParenthesisCounter++;
                 characters.add(")");
                 updateUI();
-                System.out.println(characters);
             }
         }
         else if (e.getSource() == deleteButton){
