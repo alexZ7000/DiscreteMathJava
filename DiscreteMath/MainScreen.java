@@ -1,7 +1,13 @@
 package DiscreteMath;
 
-import javax.swing.*;
-import java.awt.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +54,6 @@ public class MainScreen {
             clip.start();
         } catch (Exception ex) {
             throw new IllegalCallerException("Este arquivo não existe: ", ex);
-
         }
     }
 
@@ -194,18 +199,18 @@ public class MainScreen {
 
         leftParenthesisButton.addActionListener(e -> {
             playSound();
-            leftParenthesisCounter++;
             characters.add("(");
             updateUI();
+            leftParenthesisCounter++;
             System.out.println(characters);
         });
 
         rightParenthesisButton.addActionListener(e -> {
             playSound();
             if (leftParenthesisCounter > rightParenthesisCounter){
-                rightParenthesisCounter++;
                 characters.add(")");
                 updateUI();
+                rightParenthesisCounter++;
             }
         });
 
