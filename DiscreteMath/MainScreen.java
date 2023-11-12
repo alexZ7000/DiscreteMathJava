@@ -1,13 +1,20 @@
 package DiscreteMath;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.sound.sampled.*;
 
 
 public class MainScreen implements ActionListener {
@@ -493,9 +500,10 @@ public class MainScreen implements ActionListener {
         else if (e.getSource() == rightParenthesisButton) {
             playSound();
             if (leftParenthesisCounter > rightParenthesisCounter){
-                rightParenthesisCounter++;
                 characters.add(")");
                 updateUI();
+                rightParenthesisCounter++;
+                System.out.println(characters);
             }
         }
         else if (e.getSource() == deleteButton){
