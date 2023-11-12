@@ -16,11 +16,13 @@ public class Operations {
     private final ArrayList<Integer> binariesColumnTwo = new ArrayList<>();
     private final ArrayList<Integer> binariesColumnThree = new ArrayList<>();
     private final ArrayList<Integer> binariesColumnFour = new ArrayList<>();
+    private final ArrayList<Integer> resultOperationBinaries = new ArrayList<>();
     private final Calculation calculation = new Calculation(
             binariesColumnOne,
             binariesColumnTwo,
             binariesColumnThree,
             binariesColumnFour,
+            resultOperationBinaries,
             vAndF
     );
     private final MainScreen instanceMainScreen;
@@ -42,38 +44,34 @@ public class Operations {
         }
         getAllBinariesColumns(characters, isNegation);
         calculation.detectLogicalOperators(entireOperationCharacters, logicalOperators);
+        calculation.convertBinariesToTrueOrFalse();
         TitleConstructor(letrasEncontradas, vAndF, entireOperationCharacters, isSinglePropositon);
     }
 
     private void getAllBinariesColumns(final String characters, boolean isNegation) {
         if (this.letrasEncontradas.length() == 1){
             if (characters.contains("¬")) isNegation = true;
-            calculation.clearAllBinariesColumns();
             calculation.getBinariesColumnOne(2, isNegation);
             isSinglePropositon = true;
         }
         else if (this.letrasEncontradas.length() == 2){
             //00
-            calculation.clearAllBinariesColumns();
             calculation.getBinariesColumnOne(4, false);
             calculation.getBinariesColumnTwo(4);
         }
         else if (this.letrasEncontradas.length() == 3) {
             //000
-            calculation.clearAllBinariesColumns();
             calculation.getBinariesColumnOne(8, false);
             calculation.getBinariesColumnTwo(8);
             calculation.getBinariesColumnThree(8);
         }
         else if (this.letrasEncontradas.length() == 4) {
             //0000
-            calculation.clearAllBinariesColumns();
             calculation.getBinariesColumnOne(16, false);
             calculation.getBinariesColumnTwo(16);
             calculation.getBinariesColumnThree(16);
             calculation.getBinariesColumnFour();
         }
-        calculation.convertBinariesToTrueOrFalse();
     }
 
     private void TitleConstructor(final StringBuilder letras, final StringBuilder vAndF, final String entireOperationCharacters, final boolean isSingleProposition){
@@ -88,6 +86,7 @@ public class Operations {
         title.append(vAndF);
         // TODO: Melhorar a lógica de adicionar V e F na tabela
         TableConstructor(title);
+        calculation.clearAllBinariesColumns();
     }
 
     private void TableConstructor(final StringBuilder title){
@@ -131,6 +130,7 @@ class Calculation {
     private final ArrayList<Integer> binariesColumnTwo;
     private final ArrayList<Integer> binariesColumnThree;
     private final ArrayList<Integer> binariesColumnFour;
+    private final ArrayList<Integer> resultOperationBinaries;
     private final StringBuilder vAndF;
 
     public Calculation(
@@ -138,17 +138,24 @@ class Calculation {
             final ArrayList<Integer> binariesColumnTwo,
             final ArrayList<Integer> binariesColumnThree,
             final ArrayList<Integer> binariesColumnFour,
+            final ArrayList<Integer> resultOperationBinaries,
             final StringBuilder vAndF
     ) {
         this.binariesColumnOne = binariesColumnOne;
         this.binariesColumnTwo = binariesColumnTwo;
         this.binariesColumnThree = binariesColumnThree;
         this.binariesColumnFour = binariesColumnFour;
+        this.resultOperationBinaries = resultOperationBinaries;
         this.vAndF = vAndF;
     }
 
     public void convertBinariesToTrueOrFalse() {
         vAndF.setLength(0);
+        for (Integer resultOperationBinary : resultOperationBinaries) {
+            if (resultOperationBinary == 1) vAndF.append("<tr><td>V</td>");
+            else vAndF.append("<td>F</td>");
+            vAndF.append("</tr>");
+        } //TODO: arrumar a lógica de posicionamento da tabela
         for (int i = 0; i < binariesColumnOne.size(); i++) {
             if (binariesColumnOne.get(i) == 1) vAndF.append("<tr><td>V</td>");
             else vAndF.append("<tr><td>F</td>");
@@ -185,9 +192,9 @@ class Calculation {
     }
 
     public void getBinariesColumnTwo(final int quantityOfBinaries) {
-        for (int i = 0; i < quantityOfBinaries; i++) {
-            if (i >= quantityOfBinaries / 2) binariesColumnTwo.add(1);
-            else binariesColumnTwo.add(0);
+        for (int i = 1; i <= quantityOfBinaries / 2; i++) {
+            binariesColumnTwo.add(1);
+            binariesColumnTwo.add(0);
         }
         System.out.println("2:" + binariesColumnTwo);
     }
@@ -203,9 +210,9 @@ class Calculation {
     }
 
     public void getBinariesColumnFour() {
-        for (int i = 1; i <= 8; i++) {
-            binariesColumnFour.add(1);
-            binariesColumnFour.add(0);
+        for (int i = 0; i < 8; i++) {
+            if (i >= 8 / 2) binariesColumnFour.add(1);
+            else binariesColumnFour.add(0);
         }
         System.out.println("4:" + binariesColumnFour);
     }
@@ -219,10 +226,10 @@ class Calculation {
 
     public void detectLogicalOperators(final String entireOperationCharacters, final ArrayList<String> logicalOperators) {
         for (int i = 0; i < entireOperationCharacters.length(); i++) {
-            char c = entireOperationCharacters.charAt(i);
+            final char c = entireOperationCharacters.charAt(i);
             if (logicalOperators.contains(String.valueOf(c))) {
                 if (c == '(') parenthesisMethod(entireOperationCharacters);
-                else if (c == '∧') conjunction(entireOperationCharacters);
+                else if (c == '∧') conjunction(entireOperationCharacters, i);
                 else if (c == '∨') disjunction(entireOperationCharacters);
                 else if (c == '⊕') exclusiveDisjunction(entireOperationCharacters);
                 else if (c == '→') conditional(entireOperationCharacters);
@@ -234,8 +241,10 @@ class Calculation {
         }
     }
 
-    private void conjunction(final String entireOperationCharacters) {
-        System.out.println("Conjunção");
+    private void conjunction(final String entireOperationCharacters, final int counter) {
+        for (int i = 0;  i < binariesColumnOne.size(); i++){
+            resultOperationBinaries.add(binariesColumnOne.get(i) * binariesColumnTwo.get(i));
+        }
     }
 
     private void disjunction(final String entireOperationCharacters) {
