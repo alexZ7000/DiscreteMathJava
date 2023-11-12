@@ -84,7 +84,6 @@ public class Operations {
         if (!(isSingleProposition)) title.append("<th>").append(entireOperationCharacters).append("</th>");
         title.append("</tr>");
         title.append(vAndF);
-        // TODO: Melhorar a lógica de adicionar V e F na tabela
         TableConstructor(title);
         calculation.clearAllBinariesColumns();
     }
@@ -151,11 +150,6 @@ class Calculation {
 
     public void convertBinariesToTrueOrFalse() {
         vAndF.setLength(0);
-        for (Integer resultOperationBinary : resultOperationBinaries) {
-            if (resultOperationBinary == 1) vAndF.append("<tr><td>V</td>");
-            else vAndF.append("<td>F</td>");
-            vAndF.append("</tr>");
-        } //TODO: arrumar a lógica de posicionamento da tabela
         for (int i = 0; i < binariesColumnOne.size(); i++) {
             if (binariesColumnOne.get(i) == 1) vAndF.append("<tr><td>V</td>");
             else vAndF.append("<tr><td>F</td>");
@@ -169,6 +163,10 @@ class Calculation {
             }
             if (!binariesColumnFour.isEmpty()) {
                 if (binariesColumnFour.get(i) == 1) vAndF.append("<td>V</td>");
+                else vAndF.append("<td>F</td>");
+            }
+            if (!resultOperationBinaries.isEmpty()){
+                if (resultOperationBinaries.get(i) > 0) vAndF.append("<td>V</td>");
                 else vAndF.append("<td>F</td>");
             }
             vAndF.append("</tr>");
@@ -222,6 +220,7 @@ class Calculation {
         binariesColumnTwo.clear();
         binariesColumnThree.clear();
         binariesColumnFour.clear();
+        resultOperationBinaries.clear();
     }
 
     public void detectLogicalOperators(final String entireOperationCharacters, final ArrayList<String> logicalOperators) {
@@ -248,7 +247,9 @@ class Calculation {
     }
 
     private void disjunction(final String entireOperationCharacters) {
-        System.out.println("Disjunção");
+        for (int i = 0;  i < binariesColumnOne.size(); i++){
+            resultOperationBinaries.add(binariesColumnOne.get(i) + binariesColumnTwo.get(i));
+        }
     }
 
     private void exclusiveDisjunction(final String entireOperationCharacters) {
