@@ -467,7 +467,17 @@ public class MainScreen {
 
     private void calculateOperations(){
         if (characters.contains("P") || characters.contains("Q") || characters.contains("R") || characters.contains("S"))
-            operations.resultOperation(String.valueOf(characters));
+            try {
+                operations.resultOperation(String.valueOf(characters));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(
+                        frame,
+                        "DiscreteMath não foi capaz de executar essa operação",
+                        "DiscreteMath",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+                playSound();
+            }
         else
             JOptionPane.showMessageDialog(
                     frame,

@@ -116,6 +116,7 @@ public class Operations {
     }
 
     public void resultOperation(final String characters) {
+        calculation.clearAllBinariesColumns();
         final String strCharacters = (characters.substring(1, characters.length() - 1)).replaceAll(",", "");
         final String entireOperationCharacters = (characters.substring(1, characters.length() - 1).replaceAll(",", " "));
         calculateNumberOfPrepositions(strCharacters, entireOperationCharacters);
