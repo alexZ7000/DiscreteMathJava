@@ -94,16 +94,16 @@ public class MainScreen implements ActionListener {
         frame.setSize(x-400, y-200);
         frame.setLayout(null);
         frame.setVisible(true);
-        frame.setTitle("DiscreteMath");
+        frame.setTitle("Discrete Math");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBackground(new Color(0,0,0));
         frame.setLocationRelativeTo(null);
 
 
-        JLabel label1 = new JLabel("DiscreteMath");
+        JLabel label1 = new JLabel("Discrete Math");
         label1.setFont(new Font("serif", Font.PLAIN, 80));
         label1.setBounds(
-                x/2-400, 40, 800,
+                x/2-450, 40, 800,
                 100
         );
 
@@ -355,7 +355,7 @@ public class MainScreen implements ActionListener {
         JOptionPane.showMessageDialog(
                 frame,
                 result,
-                "DiscreteMath",
+                "Discrete Math",
                 JOptionPane.INFORMATION_MESSAGE
         );
         resultLabel.setFont(new Font("serif", Font.PLAIN, 20));
