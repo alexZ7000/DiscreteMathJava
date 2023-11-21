@@ -1,4 +1,4 @@
-# DiscreteMath Java <img src="https://github.com/alexZ7000/DiscreteMathJava/assets/78627928/408f15d2-45e2-4859-911c-5a6dd3110de9" alt="☕" width="32" height="32">
+# Discrete Math Java <img src="https://github.com/alexZ7000/DiscreteMathJava/assets/78627928/408f15d2-45e2-4859-911c-5a6dd3110de9" alt="☕" width="32" height="32">
 
 
 
@@ -28,7 +28,7 @@ O projeto ainda não está finalizado❗<br> <br>
 >
 <br>
 
-## 📫 Contribuindo para DevQuiz
+## 📫 Contribuindo para o Discrete Math
 
 Para contribuir com o <b>DiscreteMath</b>, siga estas etapas:
 
