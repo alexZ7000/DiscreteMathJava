@@ -245,24 +245,6 @@ class Calculation {
         for (int i = 0;  i < binariesColumnOne.size(); i++){
             resultOperationBinaries.add(binariesColumnOne.get(i) * binariesColumnTwo.get(i));
         }
-        System.out.println("2:" + binariesColumnTwo);
-    }
-
-    public void getBinariesColumnThree(final int quantityOfBinaries) {
-        for (int i = 0; i < quantityOfBinaries / 4; i++) {
-            binariesColumnThree.add(1);
-            binariesColumnThree.add(1);
-            binariesColumnThree.add(0);
-            binariesColumnThree.add(0);
-        }
-        System.out.println("3:" + binariesColumnThree);
-    }
-
-    public void getBinariesColumnFour() {
-        for (int i = 0; i < 8; i++) {
-            if (i >= 8 / 2) binariesColumnFour.add(1);
-            else binariesColumnFour.add(0);
-        }
         System.out.println("4:" + binariesColumnFour);
     }
 
@@ -360,6 +342,44 @@ class Calculation {
 
     private void disjunction(final String entireOperationCharacters) {
         System.out.println("Disjunção");
+    }
+
+    private void exclusiveDisjunction(final String entireOperationCharacters) {
+        System.out.println("Disjunção Exclusiva");
+    }
+
+    private void conditional(final String entireOperationCharacters) {
+        System.out.println("Condicional");
+    }
+
+    private void biconditional(final String entireOperationCharacters) {
+        System.out.println("Bicondicional");
+    }
+
+    private void materialConditional(final String entireOperationCharacters) {
+        System.out.println("Condicional Material");
+    }
+
+    private void materialBiconditional(final String entireOperationCharacters) {
+        System.out.println("Bicondicional Material");
+    }
+
+    private void equivalence(final String entireOperationCharacters) {
+        System.out.println("Equivalência");
+    }
+
+    private void parenthesisMethod(final String entireOperationCharacters) {
+        System.out.println("Parênteses Aberto");
+    }
+
+    private void negation(final String entireOperationCharacters) {
+        System.out.println("Negação");
+    }
+
+    private void disjunction(final String entireOperationCharacters) {
+        for (int i = 0;  i < binariesColumnOne.size(); i++){
+            resultOperationBinaries.add(binariesColumnOne.get(i) + binariesColumnTwo.get(i));
+        }
     }
 
     private void exclusiveDisjunction(final String entireOperationCharacters) {
