@@ -245,6 +245,103 @@ class Calculation {
         for (int i = 0;  i < binariesColumnOne.size(); i++){
             resultOperationBinaries.add(binariesColumnOne.get(i) * binariesColumnTwo.get(i));
         }
+        else {
+            for (int i = 0; i < quantityOfBinaries; ++i) {
+                if (i >= quantityOfBinaries / 2) binariesColumnOne.add(0);
+                else binariesColumnOne.add(1);
+            }
+        }
+        System.out.println("1:" + binariesColumnOne);
+    }
+
+    public void getBinariesColumnTwo(final int quantityOfBinaries) {
+        for (int i = 0; i < quantityOfBinaries; i++) {
+            if (i >= quantityOfBinaries / 2) binariesColumnTwo.add(1);
+            else binariesColumnTwo.add(0);
+        }
+        System.out.println("2:" + binariesColumnTwo);
+    }
+
+    public void getBinariesColumnThree(final int quantityOfBinaries) {
+        for (int i = 0; i < quantityOfBinaries / 4; i++) {
+            binariesColumnThree.add(1);
+            binariesColumnThree.add(1);
+            binariesColumnThree.add(0);
+            binariesColumnThree.add(0);
+        }
+        System.out.println("3:" + binariesColumnThree);
+    }
+
+    public void getBinariesColumnFour() {
+        for (int i = 1; i <= 8; i++) {
+            binariesColumnFour.add(1);
+            binariesColumnFour.add(0);
+        }
+        System.out.println("4:" + binariesColumnFour);
+    }
+
+    public void clearAllBinariesColumns() {
+        binariesColumnOne.clear();
+        binariesColumnTwo.clear();
+        binariesColumnThree.clear();
+        binariesColumnFour.clear();
+    }
+
+    public void detectLogicalOperators(final String entireOperationCharacters, final ArrayList<String> logicalOperators) {
+        for (int i = 0; i < entireOperationCharacters.length(); i++) {
+            char c = entireOperationCharacters.charAt(i);
+            if (logicalOperators.contains(String.valueOf(c))) {
+                if (c == '(') parenthesisMethod(entireOperationCharacters);
+                else if (c == '∧') conjunction(entireOperationCharacters);
+                else if (c == '∨') disjunction(entireOperationCharacters);
+                else if (c == '⊕') exclusiveDisjunction(entireOperationCharacters);
+                else if (c == '→') conditional(entireOperationCharacters);
+                else if (c == '↔') biconditional(entireOperationCharacters);
+                else if (c == '⇒') materialConditional(entireOperationCharacters);
+                else if (c == '⇔') materialBiconditional(entireOperationCharacters);
+                else if (c == '≡') equivalence(entireOperationCharacters);
+            }
+        }
+    }
+
+    private void conjunction(final String entireOperationCharacters) {
+        System.out.println("Conjunção");
+    }
+
+    private void disjunction(final String entireOperationCharacters) {
+        System.out.println("Disjunção");
+    }
+
+    private void exclusiveDisjunction(final String entireOperationCharacters) {
+        System.out.println("Disjunção Exclusiva");
+    }
+
+    private void conditional(final String entireOperationCharacters) {
+        System.out.println("Condicional");
+    }
+
+    private void biconditional(final String entireOperationCharacters) {
+        System.out.println("Bicondicional");
+    }
+
+    private void materialConditional(final String entireOperationCharacters) {
+        System.out.println("Condicional Material");
+    }
+
+    private void materialBiconditional(final String entireOperationCharacters) {
+        System.out.println("Bicondicional Material");
+    }
+
+    private void equivalence(final String entireOperationCharacters) {
+        System.out.println("Equivalência");
+    }
+
+    private void parenthesisMethod(final String entireOperationCharacters) {
+        System.out.println("Parênteses Aberto");
+    }
+
+    private void negation(final String entireOperationCharacters) {
+        System.out.println("Negação");
     }
 
     private void disjunction(final String entireOperationCharacters) {
