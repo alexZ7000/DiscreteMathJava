@@ -23,7 +23,7 @@ O projeto ainda não está finalizado❗<br> <br>
 
 
 ## 🚀 Como funciona??
-<img src="https://github.com/alexZ7000/DiscreteMathJava/assets/78627928/b61af0bb-54af-4a4d-a011-3c2ad6fe4b72" alt="calculo_da_tabela_verdade"><br>
+<img src="https://github.com/alexZ7000/DiscreteMathJava/assets/78627928/fc00a27a-aac4-4786-837b-250c4920b03e" alt="calculo_da_tabela_verdade"><br>
 >Você clica nos botões para montar suas operações🧮, e quando finalizada, você clica em calcular e o aplicativo trará o resultado da operação para você🤓
 >
 <br>
