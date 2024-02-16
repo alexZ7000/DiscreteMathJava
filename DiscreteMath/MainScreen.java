@@ -80,7 +80,7 @@ public class MainScreen {
 
         conjuncaoButton.addActionListener(e -> {
             playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.getLast())) {
                 characters.add("∧");
                 updateUI();
                 System.out.println(characters);
@@ -89,7 +89,7 @@ public class MainScreen {
 
         disjuncaoButton.addActionListener(e -> {
             playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.getLast())) {
                 characters.add("∨");
                 updateUI();
                 System.out.println(characters);
@@ -98,7 +98,7 @@ public class MainScreen {
 
         calcButton.addActionListener(e -> {
             playSound();
-            if (!characters.isEmpty() && !logicalOperators.contains(characters.get(characters.size() - 1)))
+            if (!characters.isEmpty() && !logicalOperators.contains(characters.getLast()))
                 calculateOperations();
             else{
                 JOptionPane.showMessageDialog(
@@ -120,7 +120,7 @@ public class MainScreen {
 
         disjuncaoExclusivaButton.addActionListener(e -> {
             playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.getLast())) {
                 characters.add("⊕");
                 updateUI();
                 System.out.println(characters);
@@ -129,7 +129,7 @@ public class MainScreen {
 
         condicionalButton.addActionListener(e -> {
             playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.getLast())) {
                 characters.add("→");
                 updateUI();
                 System.out.println(characters);
@@ -138,7 +138,7 @@ public class MainScreen {
 
         bicondicionalButton.addActionListener(e -> {
             playSound();
-            if (characters.size() == 1 || propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.size() == 1 || propositions.contains(characters.getLast())) {
                 characters.add("↔");
                 updateUI();
                 System.out.println(characters);
@@ -165,7 +165,7 @@ public class MainScreen {
 
         proposicaoPButton.addActionListener(e -> {
             playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.getLast())) {
                 characters.add("P");
                 updateUI();
                 System.out.println(characters);
@@ -174,7 +174,7 @@ public class MainScreen {
 
         proposicaoQButton.addActionListener(e -> {
             playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.getLast())) {
                 characters.add("Q");
                 updateUI();
                 System.out.println(characters);
@@ -183,7 +183,7 @@ public class MainScreen {
 
         proposicaoRButton.addActionListener(e -> {
             playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.getLast())) {
                 characters.add("R");
                 updateUI();
                 System.out.println(characters);
@@ -192,7 +192,7 @@ public class MainScreen {
 
         proposicaoSButton.addActionListener(e -> {
             playSound();
-            if (characters.isEmpty() || !propositions.contains(characters.get(characters.size() - 1))) {
+            if (characters.isEmpty() || !propositions.contains(characters.getLast())) {
                 characters.add("S");
                 updateUI();
                 System.out.println(characters);
@@ -219,7 +219,7 @@ public class MainScreen {
         deleteButton.addActionListener(e -> {
             playSound();
             if (!characters.isEmpty()) {
-                characters.remove(characters.size() - 1);
+                characters.removeLast();
                 updateUI();
                 System.out.println(characters);
             }
