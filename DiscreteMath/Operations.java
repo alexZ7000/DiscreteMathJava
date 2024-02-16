@@ -2,6 +2,7 @@ package DiscreteMath;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class Operations {
@@ -254,15 +255,21 @@ class Calculation {
     }
 
     private void exclusiveDisjunction(final String entireOperationCharacters) {
-        System.out.println("Disjunção Exclusiva");
+        for (int i = 0;  i < binariesColumnOne.size(); i++){
+            resultOperationBinaries.add((binariesColumnOne.get(i) + binariesColumnTwo.get(i)) % 2);
+        }
     }
 
     private void conditional(final String entireOperationCharacters) {
-        System.out.println("Condicional");
+        for (int i = 0;  i < binariesColumnOne.size(); i++){
+            resultOperationBinaries.add((binariesColumnOne.get(i) == 1 && binariesColumnTwo.get(i) == 0) ? 0 : 1);
+        }
     }
 
     private void biconditional(final String entireOperationCharacters) {
-        System.out.println("Bicondicional");
+        for (int i = 0;  i < binariesColumnOne.size(); i++){
+            resultOperationBinaries.add((Objects.equals(binariesColumnOne.get(i), binariesColumnTwo.get(i))) ? 1 : 0);
+        }
     }
 
     private void materialConditional(final String entireOperationCharacters) {
