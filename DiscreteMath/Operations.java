@@ -230,8 +230,8 @@ class Calculation {
             final char c = entireOperationCharacters.charAt(i);
             if (logicalOperators.contains(String.valueOf(c))) {
                 if (c == '(') parenthesisMethod(entireOperationCharacters);
-                else if (c == '∧') conjunction(entireOperationCharacters, i);
                 else if (c == '∨') disjunction(entireOperationCharacters);
+                else if (c == '∧') conjunction(entireOperationCharacters, i);
                 else if (c == '⊕') exclusiveDisjunction(entireOperationCharacters);
                 else if (c == '→') conditional(entireOperationCharacters);
                 else if (c == '↔') biconditional(entireOperationCharacters);
